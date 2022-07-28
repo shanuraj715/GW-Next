@@ -1,0 +1,42 @@
+.tagsBlock {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.tagsContainer {
+  text-align: center;
+  /* display: inline-block; */
+}
+
+.tagsList {
+  margin: 10px 25px;
+  display: inline-block;
+  max-width: 800px;
+  width: 800px;
+  max-width: 800px;
+  padding: 10px;
+  background-color: rgba(223, 228, 234, 1);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  text-align: center;
+  justify-content: center;
+  text-align: start;
+}
+
+.tagText:hover {
+  background-color: var(--dark-blue);
+  color: white;
+}
+
+.tagText {
+  padding: 6px 10px;
+  display: inline-block;
+  background-color: #95a5a6;
+  margin: 4px;
+  white-space: nowrap;
+  cursor: pointer;
+}

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import '../styles/globals.scss'
+import '/styles/margin.css'
+import '/styles/padding.css'
 import MainLayout from '../components/MainLayout/MainLayout'
 import 'bootstrap/dist/css/bootstrap.css'
 import Head from 'next/head'
