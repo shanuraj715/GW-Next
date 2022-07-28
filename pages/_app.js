@@ -4,6 +4,7 @@ import MainLayout from '../components/MainLayout/MainLayout'
 import 'bootstrap/dist/css/bootstrap.css'
 import Head from 'next/head'
 import Header from '../components/common/Header/Header'
+import Footer from '../components/common/Footer/Footer'
 import '../public/css/fonts-awesome/css/all.css'
 import { Toaster } from 'react-hot-toast';
 import SignIn from '/components/SignIn/SignIn'
@@ -41,7 +42,7 @@ function MyApp({ Component, pageProps }) {
     <MainLayout>
       <Component {...pageProps} />
     </MainLayout>
-
+    <Footer />
     {modals.signinVisible && <SignIn hide={() => toggleModals('signinVisible', false)} openSignUpModal={() => toggleModals('signupVisible', true)} openForgotPasswordModal={() => toggleModals('forgotPasswordVisible', true)} />}
     {modals.signupVisible && <SignUp hide={() => toggleModals('signupVisible', false)} openSignInModal={() => toggleModals('signinVisible', true)} />}
     {modals.forgotPasswordVisible && <ResetPassword hide={() => toggleModals('forgotPasswordVisible', false)} openSignInModal={() => toggleModals('signinVisible', true)} />}
