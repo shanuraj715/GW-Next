@@ -1,97 +1,108 @@
-.song-skeleton-cont, .category-skeleton-cont {
-    position: relative;
-    overflow: hidden;
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
+.songSkeletonCont,
+.categorySkeletonCont {
+  position: relative;
+  overflow: hidden;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
 }
 
-.song-skeleton-cont::after, .category-skeleton-cont::after {
-    content: '';
-    height: 100%;
-    top: 0;
-    width: 80px;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    background-image: linear-gradient(to right, transparent, #333, transparent);
-    opacity: 0.2;
-    position: absolute;
-    transform: rotate(20deg) scale(2);
-    -webkit-transform: rotate(20deg) scale(2);
-    -moz-transform: rotate(20deg) scale(2);
-    -ms-transform: rotate(20deg) scale(2);
-    -o-transform: rotate(20deg) scale(2);
-    animation: skeleton_anim 2s infinite;
-    -webkit-animation: skeleton_anim 2.5s infinite;
+.songSkeletonCont::after,
+.categorySkeletonCont::after {
+  content: "";
+  height: 100%;
+  top: 0;
+  width: 80px;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  background-image: linear-gradient(to right, transparent, #333, transparent);
+  opacity: 0.2;
+  position: absolute;
+  transform: rotate(20deg) scale(2);
+  -webkit-transform: rotate(20deg) scale(2);
+  -moz-transform: rotate(20deg) scale(2);
+  -ms-transform: rotate(20deg) scale(2);
+  -o-transform: rotate(20deg) scale(2);
+  animation: skeleton_anim 2s infinite;
+  -webkit-animation: skeleton_anim 2.5s infinite;
 }
 
 @keyframes skeleton_anim {
-    from {
-        left: -200px;
-    }
+  from {
+    left: -200px;
+  }
 
-    to {
-        left: 100vw;
-    }
+  to {
+    left: 100vw;
+  }
 }
 
-.song-skeleton {
-    display: flex;
-    padding: 10px 25px;
-    filter: blur(7px);
-    -webkit-filter: blur(7px);
-    border-bottom: solid 2px var(--dark-blue);
-    margin: 5px auto;
+.songSkeleton {
+  display: flex;
+  padding: 10px 25px;
+  filter: blur(7px);
+  -webkit-filter: blur(7px);
+  border-bottom: solid 2px var(--dark-blue);
+  margin: 5px auto;
 }
 
 .ss-img {
-    min-height: 50px;
-    min-width: 50px;
-    /* background-color: #999; */
-    border-radius: 7px;
-    -webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-    -ms-border-radius: 7px;
-    -o-border-radius: 7px;
-    opacity: 0.6;
+  min-height: 50px;
+  min-width: 50px;
+  /* background-color: #999; */
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+  opacity: 0.6;
 }
 
-.ss-img * {
-    font-size: 44px;
-    filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);
+.ssImg * {
+  font-size: 44px;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
 }
 
-.ss-data {
-    flex-grow: 2;
-    margin: 4px 12px;
+.ssData {
+  flex-grow: 2;
+  margin: 4px 12px;
 }
 
-.ss-title {
-    min-height: 18px;
-    background-image: linear-gradient(to right, var(--dark-blue), transparent);
-    min-width: 100%;
-    opacity: 0.4;
+.ssTitle {
+  min-height: 18px;
+  background-image: linear-gradient(to right, var(--dark-blue), transparent);
+  min-width: 100%;
+  opacity: 0.4;
 }
 
-.ss-desc {
-    margin-top: 8px;
-    min-height: 18px;
-    background-image: linear-gradient(to right, #888, transparent);
-    min-width: 100%;
-    opacity: 0.6;
+.ssDesc {
+  margin-top: 8px;
+  min-height: 18px;
+  background-image: linear-gradient(to right, #888, transparent);
+  min-width: 100%;
+  opacity: 0.6;
 }
-
 
 /* ---------------------------------------------------- */
 
 /* CATEGORY SKELETON */
 
-.cat-skeleton-text{
-    display: inline-block;
-    min-width: 650px;
-    max-width: 80vw;
-    min-height: 18px;
-    max-height: 18px;
-    background-image: linear-gradient(to right, rgba(41, 128, 185, 0.2), transparent);
-    margin-left: 15px;
+.categoryCard {
+  padding: 10px 26px;
+  display: flex;
+  gap: 20px;
+}
+
+.catSkeletonText {
+  display: inline-block;
+  min-width: 650px;
+  max-width: 80vw;
+  min-height: 18px;
+  max-height: 18px;
+  background-image: linear-gradient(
+    to right,
+    rgba(41, 128, 185, 0.2),
+    transparent
+  );
+  margin-left: 15px;
 }

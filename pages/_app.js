@@ -13,6 +13,9 @@ import ResetPassword from '/components/ResetPassword/ResetPassword'
 import '/styles/global.css'
 import {APP_INFO} from '/constants'
 
+// CUSTOM LOG
+import '/components/log/index'
+
 function MyApp({ Component, pageProps }) {
 
   const allModals = {
@@ -40,7 +43,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     import('bootstrap/dist/js/bootstrap')
     setDataAttributeOnBody()
-  })
+  }, [])
 
   return <>
     <Head>

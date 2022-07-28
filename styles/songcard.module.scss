@@ -3,7 +3,7 @@
 .songCard {
   display: flex;
   align-items: center;
-  padding: 12px 25px;
+  padding: 8px 25px;
   border-bottom: 1px solid $darkBlue;
   text-decoration: none;
   transition: all 0.1s linear;
@@ -11,6 +11,7 @@
   -moz-transition: all 0.1s linear;
   -ms-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .songCard:hover {
@@ -30,7 +31,7 @@
 }
 
 .songCardSt {
-  padding: 2px 0 !important;
+  padding: 0 !important;
   margin: 0 !important;
   color: #487eb0;
   white-space: nowrap;
@@ -40,7 +41,7 @@
 }
 
 .songCardSd {
-  padding: 2px 0;
+  padding: 0;
   margin: 0 !important;
   color: $lightBlack;
   font-size: 16px;
@@ -50,7 +51,7 @@
 .songCardSd span {
   border-right: 2px solid $darkBlue;
   padding-right: 10px;
-  margin-right: 10px;
+  margin-right: 10px !important;
 }
 
 .songCard:hover > .songCardData .songCardSd span {

@@ -18,16 +18,16 @@ export default class SongSkeleton extends Component {
     render() {
         return (
             <>
-                <div className="song-skeleton-cont" id="song-skeleton-cont">
-                    {this.state.arr.map((item, index) => <div className="song-skeleton" key={ index }>
-                            <div className="ss-img">
-                                <Icon type="duotone" classes="fa-music" color1="var(--light-black)" color2="var(--light-red)" />
-                            </div>
-                            <div className="ss-data">
-                                <div className="ss-title"></div>
-                                <div className="ss-desc"></div>
-                            </div>
+                <div className={styles.songSkeletonCont} id="song-skeleton-cont">
+                    {this.state.arr.map((item, index) => <div className={styles.songSkeleton} key={index}>
+                        <div className={styles.ssImg}>
+                            <Icon type="duotone" classes="fa-music" color1="var(--light-black)" color2="var(--light-red)" />
                         </div>
+                        <div className={styles.ssData}>
+                            <div className={styles.ssTitle}></div>
+                            <div className={styles.ssDesc}></div>
+                        </div>
+                    </div>
                     )}
                 </div>
             </>

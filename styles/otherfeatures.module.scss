@@ -1,0 +1,110 @@
+@import "./variables.scss";
+
+.otherFeaturesCont {
+  padding-bottom: 15px;
+}
+
+.otherFeatureLinks {
+  padding: 0 15px;
+  margin-top: 15px !important;
+}
+
+.customBtn {
+  min-width: 150px;
+  min-height: 30px;
+  padding: 10px 25px;
+  border: 2px solid $darkRed;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  margin: 10px 15px !important;
+  color: $darkBlack;
+}
+
+.customBtn:hover {
+  border-color: $darkBlue;
+}
+
+.btnThree {
+  line-height: 39px;
+  padding: 0;
+  text-decoration: none;
+}
+
+.btnThree:hover {
+  background: transparent;
+  color: $lightRed;
+}
+
+.btnThree span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.btnThree:before,
+.btnThree:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  background: $darkYellow;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.btnThree:before {
+  height: 0%;
+  width: 2px;
+}
+
+.btnThree:after {
+  width: 0%;
+  height: 2px;
+}
+
+.btnThree:hover:before {
+  height: 100%;
+}
+
+.btnThree:hover:after {
+  width: 100%;
+}
+
+.btnThree span:before,
+.btnThree span:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background: $darkYellow;
+  transition: all 0.3s ease;
+}
+
+.btnThree span:before {
+  width: 2px;
+  height: 0%;
+}
+
+.btnThree span:after {
+  width: 0%;
+  height: 2px;
+}
+
+.btnThree span:hover:before {
+  height: 100%;
+}
+
+.btnThree span:hover:after {
+  width: 100%;
+}
