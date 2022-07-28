@@ -1,32 +1,31 @@
-import React, { Component } from 'react'
-import { Icon, Title } from '../../components/Index'
+import { useState, useEffect } from 'react'
+import Icon from '/components/FontAwesome/FontAwesome'
+import Title from '/components/common/SectionTitle/SectionTitle'
+import styles from '/styles/songSkeleton.module.scss'
 
-export default class CategorySkeleton extends Component {
-    state = {
-        arr: []
-    }
+export default function CategorySkeleton(props) {
+    const [arr, setArr] = useState([])
 
-    componentDidMount() {
+    const { count = 5 } = props
+
+    useEffect(() => {
         let arr = []
-        let count = this.props.count || 5
         for (let i = 0; i < count; i++) arr.push(i)
-        this.setState({ arr: arr })
-    }
+        setArr(arr)
+    }, [count])
 
-    render() {
-        return (
-            <>
-                <div className="category-skeleton-cont" id="category-skeleton-cont">
-                    <Title iconClass="fa-guitar-electric" title="Loading Categories" />
-                    {this.state.arr.map((item, index) => <span className="category-card" key={index}>
-                        <span>
-                            <Icon classes="fa-arrow-alt-right" type="duotone" color1="var(--light-red)" color2="var(--light-pink)" />
-                        </span>
-                        <span className="cat-skeleton-text"></span>
+    return (
+        <>
+            <div className={styles.categorySkeletonCont} id="category-skeleton-cont">
+                <Title iconClass="fa-guitar-electric" title="Loading Categories" />
+                {arr.map((item, index) => <p className={styles.categoryCard} key={index}>
+                    <span>
+                        <Icon classes="fa-arrow-alt-right" type="duotone" color1="var(--light-red)" color2="var(--light-pink)" />
                     </span>
-                    )}
-                </div>
-            </>
-        )
-    }
+                    <span className={styles.catSkeletonText}></span>
+                </p>
+                )}
+            </div>
+        </>
+    )
 }
