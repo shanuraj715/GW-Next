@@ -1,0 +1,40 @@
+.noResultContainer {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.noResultImageC {
+  display: inline-block;
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.noResultImageC img {
+}
+
+.noResData {
+}
+
+.noResTitle {
+  font-size: 52px;
+  color: #f72204;
+}
+
+.noResDesc {
+  font-size: 22px;
+}
+
+.noResLink {
+  margin: 20px 0;
+  display: inline-block;
+  border: solid 2px #f72204;
+  padding: 8px 18px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: var(--dark-black);
+  background-color: var(--dark-white);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
