@@ -15,6 +15,8 @@ function Header(props) {
 
     const router = useRouter()
 
+    const {userName, isLogged, openSignInModal, openSignUpModal} = props
+
     const [string, setString] = useState('')
     const [redirectTo, setRedirectTo] = useState('')
 
@@ -86,16 +88,16 @@ function Header(props) {
                     <Icon type="solid" classes="fa-user" />
                 </button>
                 <div className={styles.headerUmDropdown}>
-                    <span className={styles.hddUsername}>{props.userName || "*************"}</span>
+                    <span className={styles.hddUsername}>{userName || "*************"}</span>
 
-                    {props.isLogged ?
+                    {isLogged ?
                         <>
                             <button className={styles.huLink}>My Favorites</button>
                             <button className={styles.huLink}>Profile Settings</button>
                             <button className={`${styles.huLink} ${styles.huLogout}`} onClick={logout}>Logout</button>
                         </> : <>
-                            <button className={`${styles.headerDropBtn} ${styles.dropBtnSignin}`} onClick={() => {}}>Sign In</button>
-                            <button className={`${styles.headerDropBtn} ${styles.dropBtnSignup}`}> Sign Up</button >
+                            <button className={`${styles.headerDropBtn} ${styles.dropBtnSignin}`} onClick={openSignInModal}>Sign In</button>
+                            <button className={`${styles.headerDropBtn} ${styles.dropBtnSignup}`} onClick={openSignUpModal}>Sign Up</button>
                         </>}
 
                 </div >
