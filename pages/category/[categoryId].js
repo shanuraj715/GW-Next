@@ -136,7 +136,7 @@ export default function Category(props) {
                         </div>}
                 </div>
             </div>
-            <Tags data={tags} />
+            {tags.length > 0 && <Tags data={tags} />}
             <OtherFeatures />
         </>}
     </>
