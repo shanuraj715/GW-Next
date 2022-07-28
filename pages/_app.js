@@ -10,6 +10,7 @@ import { Toaster } from 'react-hot-toast';
 import SignIn from '/components/SignIn/SignIn'
 import SignUp from '/components/SignUp/SignUp'
 import ResetPassword from '/components/ResetPassword/ResetPassword'
+import '/styles/global.css'
 import {APP_INFO} from '/constants'
 
 function MyApp({ Component, pageProps }) {

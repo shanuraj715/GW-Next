@@ -1,0 +1,68 @@
+@import "./variables.scss";
+
+.songCard {
+  display: flex;
+  align-items: center;
+  padding: 12px 25px;
+  border-bottom: 1px solid $darkBlue;
+  text-decoration: none;
+  transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+}
+
+.songCard:hover {
+  background-color: $hover;
+  border-color: $darkRed;
+}
+
+.songCardLogo {
+  font-size: 36px;
+  padding: 0 15px 0 0;
+  color: $darkRed;
+}
+
+.songCardData {
+  width: 100%;
+  display: grid;
+}
+
+.songCardSt {
+  padding: 2px 0 !important;
+  margin: 0 !important;
+  color: #487eb0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 18px;
+}
+
+.songCardSd {
+  padding: 2px 0;
+  margin: 0 !important;
+  color: $lightBlack;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.songCardSd span {
+  border-right: 2px solid $darkBlue;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+.songCard:hover > .songCardData .songCardSd span {
+  border-right: 2px solid $darkGreen;
+}
+
+.songCard:hover > .songCardData .songCardSd span:last-child {
+  border-right: none;
+}
+
+.songCardSd span:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
