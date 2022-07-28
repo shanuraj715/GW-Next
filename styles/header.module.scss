@@ -1,0 +1,244 @@
+@import "./variables.scss";
+
+.header {
+  display: flex;
+  background-color: $darkBlack !important;
+  color: $lightWhite;
+  padding: 15px;
+  border-bottom: solid 2px $lightWhite;
+  align-items: center;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    font-family: "Yeon Sung", cursive;
+    padding: 0 20px;
+    font-size: 18px;
+  }
+}
+
+.headerImage {
+  width: 330px;
+}
+
+.headerCenter {
+  text-align: right;
+  flex-grow: 1;
+  margin: auto 40px;
+}
+
+.headerRight {
+  text-align: end;
+  padding-left: 10px;
+  padding-right: 2%;
+}
+
+.headerUserNavbar {
+  position: relative;
+}
+
+.headerUserNavbar:hover .headerUmDropdown {
+  display: initial;
+  visibility: visible;
+  opacity: 1;
+  animation: xx 1s linear;
+  -webkit-animation: header-drop-anim 0.15s ease-in;
+}
+
+@keyframes header-drop-anim {
+  from {
+    transform: translateY(10px);
+    -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    -ms-transform: translateY(10px);
+    -o-transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.headerUserBtn {
+  background-color: $lightBlue;
+  padding: 11px;
+  border-radius: 50%;
+  min-width: 45px;
+  max-width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  color: white;
+  border: solid 2px $darkYellow;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.headerUmDropdown {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 50px;
+  right: -10px;
+  background-color: $darkWhite;
+  min-width: 250px;
+  padding: 12px;
+  color: $darkBlack;
+  text-align: initial;
+  border: solid 2px $darkBlue;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+
+  &::before {
+    content: "";
+    min-width: 16px;
+    max-width: 16px;
+    min-height: 16px;
+    max-height: 16px;
+    background-color: $darkWhite;
+    position: absolute;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    top: -10px;
+    z-index: 0;
+    border-radius: 5px;
+    border: solid 2px transparent;
+    border-top-color: $darkBlue;
+    border-left-color: $darkBlue;
+    -webkit-border-radius: 5px;
+    right: 20px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+  }
+
+  &::after {
+    content: "";
+    min-width: 100%;
+    height: 30px;
+    /* background-color: red; */
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    top: -30px;
+  }
+}
+
+.hddUsername {
+  color: $darkBlue;
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: solid 2px $darkRed;
+  display: block;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.headerSearchCont {
+  position: relative;
+  overflow: hidden;
+
+  input {
+    padding: 8px 10px;
+    padding-right: 45px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    min-width: 300px;
+    letter-spacing: 1px;
+    background-color: $darkWhite;
+    font-family: "Courgette", cursive;
+  }
+
+  button {
+    padding: 9px 12px;
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 0;
+    background-image: linear-gradient(to right, $darkWhite, $darkYellow);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    font-size: 16px;
+    color: $darkRed;
+  }
+}
+
+.huLink {
+  padding: 12px 15px;
+  width: 100%;
+  margin: 5px 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: solid 1px $darkBlack;
+  text-align: initial;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2362af;
+    color: white;
+  }
+
+  .headerDropBtn {
+    width: 100%;
+    margin: 5px 0;
+    padding: 15px;
+    border: solid 2px $darkYellow;
+    outline: none;
+    font-size: 15px;
+    cursor: pointer;
+  }
+}
+
+.huLink,
+.headerDropBtn {
+  width: 100%;
+  margin: 5px 0;
+  padding: 15px;
+  border: solid 2px $darkYellow;
+  outline: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.huLogout:hover {
+  background-color: #ff4757 !important;
+}
+
+.dropBtnSignin {
+  background-color: #1dd1a1;
+}
+
+.dropBtnSignup {
+  background-color: $darkBlue;
+}
