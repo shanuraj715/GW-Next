@@ -1,0 +1,35 @@
+@import "./variables.scss";
+
+.breadcrumbCont {
+  background-color: $lightWhite;
+  border-bottom: solid 1px $darkRed;
+  padding: 6px 25px;
+}
+
+.breadcrumbSap {
+  color: $darkRed;
+}
+
+a.breadcrumbLink {
+  text-decoration: none;
+  color: $lightBlue;
+  cursor: pointer;
+}
+
+a.breadcrumbLink:hover {
+  color: $darkRed;
+}
+
+span.breadcrumbLink {
+  text-decoration: none;
+  color: $lightBlack;
+  cursor: pointer;
+}
+
+span.breadcrumbLink:hover {
+  color: $darkGreen;
+}
+
+.homeBtn {
+  color: $lightBlack;
+}

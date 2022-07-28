@@ -1,0 +1,56 @@
+.paginationBtnCont {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.paginationBtnCont span {
+  margin: 4px 5px;
+  padding: 8px 15px;
+  display: inline-block;
+  text-decoration: none;
+  border: solid 2px var(--dark-blue);
+  background-color: #555;
+  color: white;
+  cursor: pointer;
+  min-width: 70px;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+}
+
+.paginationBtnCont a {
+  margin: 4px 5px;
+  padding: 8px 15px;
+  display: inline-block;
+  text-decoration: none;
+  border: solid 2px var(--dark-blue);
+  min-width: 85px;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+}
+
+.paginationBtnCont a:hover {
+  border-color: var(--dark-red);
+}
+
+.paginationBtnCont a:nth-child(1) {
+  background-color: #c7ecee;
+}
+
+.paginationBtnCont a:nth-child(2) {
+}
+
+.paginationBtnCont a:nth-child(3) {
+}
+
+.paginationBtnCont a:nth-child(4) {
+}
+
+.paginationBtnCont a:nth-child(5) {
+  background-color: #c7ecee;
+}
