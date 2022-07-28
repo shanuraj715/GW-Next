@@ -6,6 +6,7 @@ import Head from 'next/head'
 import Header from '../components/common/Header/Header'
 import '../public/css/fonts-awesome/css/all.css'
 import { Toaster } from 'react-hot-toast';
+import SignIn from '/components/SignIn/SignIn'
 
 function MyApp({ Component, pageProps }) {
 
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }) {
     <MainLayout>
       <Component {...pageProps} />
     </MainLayout>
+    <SignIn />
     <Toaster />
   </>
 }
