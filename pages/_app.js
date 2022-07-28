@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
   const allModals = {
     signinVisible: false,
     signupVisible: false,
-    forgotPasswordVisible: true
+    forgotPasswordVisible: false
   }
 
   const [modals, setModals] = useState({ ...allModals })
