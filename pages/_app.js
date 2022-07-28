@@ -11,6 +11,7 @@ import SignIn from '/components/SignIn/SignIn'
 import SignUp from '/components/SignUp/SignUp'
 import ResetPassword from '/components/ResetPassword/ResetPassword'
 import '/styles/global.css'
+import {APP_INFO} from '/constants'
 
 function MyApp({ Component, pageProps }) {
 
@@ -31,8 +32,14 @@ function MyApp({ Component, pageProps }) {
     setModals({ setAllFalse, [key]: bool })
   }
 
+  const setDataAttributeOnBody = () => {
+    const body = document.getElementsByTagName('body')
+    body[0].setAttribute('data-before', APP_INFO.APP_NAME)
+  }
+
   useEffect(() => {
     import('bootstrap/dist/js/bootstrap')
+    setDataAttributeOnBody()
   })
 
   return <>
