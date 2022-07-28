@@ -1,0 +1,17 @@
+:root {
+    --light-black: #2f3640;
+    --dark-black: #2d3436;
+    --light-yellow: #ffcd06;
+    --dark-yellow: #e1b12c;
+    --light-pink: #fd79a8;
+    --dark-pink: #e84393;
+    --light-red: #eb3b5a;
+    --dark-red: #eb4d4b;
+    --light-green: #26de81;
+    --dark-green: #20bf6b;
+    --light-blue: #54a0ff;
+    --dark-blue: #0097e6;
+    --light-white: rgba(245, 246, 250, 1);
+    --dark-white: #dfe6e9;
+    --hover: rgba(45, 52, 54, 0.15);
+}

@@ -1,0 +1,34 @@
+@import "./variables.scss";
+
+.hLatestUploads {
+  border-bottom: solid 2px $darkYellow;
+}
+
+.latestUploadMoreBtn {
+  padding: 10px 45px;
+  text-align: end;
+  margin: 0 12px;
+  background-image: linear-gradient(
+    to right,
+    rgba(47, 53, 66, 0.2),
+    transparent,
+    rgba(47, 53, 66, 0.2)
+  );
+}
+
+.latestUploadMoreBtn a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: $darkRed;
+  transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  position: relative;
+}
+
+.hLuList {
+  padding: 0 12px;
+}
