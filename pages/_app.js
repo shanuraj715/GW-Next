@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import '../styles/globals.scss'
 import MainLayout from '../components/MainLayout/MainLayout'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -10,9 +10,15 @@ import SignIn from '/components/SignIn/SignIn'
 
 function MyApp({ Component, pageProps }) {
 
+  const [loginVisible, setLoginVisible] = useState(true)
+
   useEffect(() => {
     import('bootstrap/dist/js/bootstrap')
   })
+
+  const toggleSignInModal = (bool) => {
+    setLoginVisible(bool ?? !loginVisible)
+  }
 
   return <>
     <Head>
@@ -22,7 +28,11 @@ function MyApp({ Component, pageProps }) {
     <MainLayout>
       <Component {...pageProps} />
     </MainLayout>
-    <SignIn />
+
+
+    {loginVisible && <SignIn hide={() => toggleSignInModal(false)} />}
+    
+    
     <Toaster />
   </>
 }

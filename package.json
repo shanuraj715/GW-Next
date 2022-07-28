@@ -18,7 +18,8 @@
     "react-tooltip": "^4.2.21",
     "reactjs-localstorage": "^1.0.1",
     "sass": "^1.54.0",
-    "universal-cookie": "^4.0.4"
+    "universal-cookie": "^4.0.4",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "eslint": "8.20.0",
