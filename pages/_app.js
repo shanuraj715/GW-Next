@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
     <Head>
       <link rel="icon" href="/favicon.png" />
     </Head>
-    <Header />
+    <Header openSignInModal={() => toggleModals('signinVisible', true)} openSignUpModal={() => toggleModals('signupVisible', true)} />
     <MainLayout>
       <Component {...pageProps} />
     </MainLayout>
