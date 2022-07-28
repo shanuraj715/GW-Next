@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 
 const cookie = new Cookie();
 
-function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
+function ResetPassword({ hide, openSignInModal }) {
 
     var time;
 
@@ -30,6 +30,14 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [otp, setOtp] = useState('')
+    const [password2, setPassword2] = useState('')
+    const [stepCompleted, setStepCompleted] = useState(0)
+
+    const getBtnTextFromStepCompleted = () => {
+        const arr = ['Get OTP', "Verify OTP", 'Change Password']
+        return arr[stepCompleted]
+    }
 
     useEffect(() => {
         return () => {
@@ -87,7 +95,7 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
             }}>
                 <div className={styles.formCont} id="form" style={{ backgroundImage: `url(${image.src})` }}>
                     <div className={styles.formHead}>
-                        <h3 className={styles.formHeadText}>Sign In</h3>
+                        <h3 className={styles.formHeadText}>Reset Password</h3>
                         <span className={styles.formCloseBtn} onClick={hideModal}>
                             <Icon classes="fa-times" type="solid" />
                         </span>
@@ -95,23 +103,28 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
                     <div className={styles.formData}>
                         <div className={styles.formInpRow}>
                             <input type="text" className={styles.lrFormInp}
-                                placeholder="Your Email" value={email}
-                                onChange={e => setEmail(e.target.value)} />
+                                placeholder="Your Email (something@example.com)" value={email}
+                                onChange={e => setEmail(e.target.value)} disabled={!(stepCompleted === 0)} />
                         </div>
                         <div className={styles.formInpRow}>
-                            <input type="password" className={styles.lrFormInp}
-                                placeholder="Your Password" value={password}
-                                onChange={e => setPassword(e.target.value)} />
+                            <input type="text" className={styles.lrFormInp}
+                                placeholder="Enter OTP" value={otp}
+                                onChange={e => setOtp(e.target.value)} disabled={!(stepCompleted === 1)} />
+                        </div>
+                        <div className={`${styles.formInpRow} flex-column flex-md-row`}>
+                            <input type="text" className={styles.lrFormInp}
+                                placeholder="Enter New Password" value={password}
+                                onChange={e => setPassword(e.target.value)} disabled={!(stepCompleted === 2)} />
+                            <input type="text" className={styles.lrFormInp}
+                                placeholder="Confirm New Password" value={password2}
+                                onChange={e => setPassword2(e.target.value)} disabled={!(stepCompleted === 2)} />
                         </div>
                         <div className={styles.lrBtnCont}>
-                            <button className={styles.lrSignInBtn} onClick={submitForm}>Sign In</button>
+                            <button className={styles.lrSignInBtn} onClick={submitForm}>{getBtnTextFromStepCompleted()}</button>
                         </div>
-                        <p className={styles.lfFp}>
-                            <button className={styles.resetPasswordBtn} onClick={openForgotPasswordModal}>Forgot Password ?</button>
-                        </p>
 
                         <div className={styles.lrBottomRow}>
-                            <p className="">Do not have an account? <strong onClick={openSignUpModal}>Sign Up</strong></p>
+                            <p className="">Already have an account? <strong onClick={openSignInModal}>Sign In</strong></p>
                         </div>
                     </div>
                 </div>
@@ -122,4 +135,4 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
 
 }
 
-export default SignIn
+export default ResetPassword

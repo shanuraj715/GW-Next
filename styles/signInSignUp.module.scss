@@ -131,6 +131,7 @@
   padding: 5px 0;
   margin: 10px 0;
   display: flex;
+  gap: 20px;
 }
 
 .lrFormInp {
@@ -142,6 +143,7 @@
   border: solid 1px $darkPink;
   border-radius: 3px;
   outline: none;
+  min-width: 120px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;

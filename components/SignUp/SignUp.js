@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 
 const cookie = new Cookie();
 
-function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
+function SignUp({ hide, openSignInModal }) {
 
     var time;
 
@@ -87,15 +87,23 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
             }}>
                 <div className={styles.formCont} id="form" style={{ backgroundImage: `url(${image.src})` }}>
                     <div className={styles.formHead}>
-                        <h3 className={styles.formHeadText}>Sign In</h3>
+                        <h3 className={styles.formHeadText}>Sign Up</h3>
                         <span className={styles.formCloseBtn} onClick={hideModal}>
                             <Icon classes="fa-times" type="solid" />
                         </span>
                     </div>
                     <div className={styles.formData}>
+                        <div className={`${styles.formInpRow} flex-column flex-md-row`}>
+                            <input type="text" className={styles.lrFormInp}
+                                placeholder="Your Full Name" value={email}
+                                onChange={e => setEmail(e.target.value)} />
+                            <input type="text" className={styles.lrFormInp}
+                                placeholder="Your Mobile Number" value={email}
+                                onChange={e => setEmail(e.target.value)} />
+                        </div>
                         <div className={styles.formInpRow}>
                             <input type="text" className={styles.lrFormInp}
-                                placeholder="Your Email" value={email}
+                                placeholder="Your Email (something@example.com)" value={email}
                                 onChange={e => setEmail(e.target.value)} />
                         </div>
                         <div className={styles.formInpRow}>
@@ -104,14 +112,11 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
                                 onChange={e => setPassword(e.target.value)} />
                         </div>
                         <div className={styles.lrBtnCont}>
-                            <button className={styles.lrSignInBtn} onClick={submitForm}>Sign In</button>
+                            <button className={styles.lrSignInBtn} onClick={submitForm}>Sign Up</button>
                         </div>
-                        <p className={styles.lfFp}>
-                            <button className={styles.resetPasswordBtn} onClick={openForgotPasswordModal}>Forgot Password ?</button>
-                        </p>
 
                         <div className={styles.lrBottomRow}>
-                            <p className="">Do not have an account? <strong onClick={openSignUpModal}>Sign Up</strong></p>
+                            <p className="">Already have an account? <strong onClick={openSignInModal}>Sign In</strong></p>
                         </div>
                     </div>
                 </div>
@@ -122,4 +127,4 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
 
 }
 
-export default SignIn
+export default SignUp
