@@ -4,14 +4,13 @@ import OtherFeatures from '/components/common/OtherFeatures/OtherFeatures'
 import Title from '/components/common/SectionTitle/SectionTitle'
 import SongCard from '/components/common/SongCard/SongCard'
 import SongSkeleton from '/components/common/Skeleton/SongSkeleton'
-import img from '/assets/images/no-result.svg'
+import noResultImage from '/assets/images/no-result.png'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { getRequest } from '/extra/request'
 import { pascalCase } from '/extra/utils'
 import paginationStyles from '/styles/pagination.module.scss'
-import Footer from '../../components/common/Footer/Footer'
 
 export default function Search(props) {
 
@@ -25,12 +24,14 @@ export default function Search(props) {
     const [totalResults, setTotalResults] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
     const [totalPages, setTotalPages] = useState(1)
+    const [noResult, setNoResult] = useState(false)
 
     const getPageNo = useCallback(() => {
         return parseInt(query.page ?? 1)
     }, [query])
 
     const fetchData = useCallback(async () => {
+        setNoResult(false)
         let offset = (getPageNo() * perPageLimitResults) - perPageLimitResults
         const payload = {
             str: query.searchText,
@@ -43,11 +44,15 @@ export default function Search(props) {
             setTotalResults(result.total_results)
             setIsLoading(false)
             setTotalPages(Math.ceil((result.total_results || 1) / perPageLimitResults))
+            if (result.data.length === 0) {
+                setNoResult(true)
+                toast.error("Zero result found...", { position: 'bottom-left' })
+            }
         }
         catch (err) {
             log(err)
         }
-    }, [getPageNo, perPageLimitResults, query, router])
+    }, [getPageNo, perPageLimitResults, query])
 
     useEffect(() => {
         setIsLoading(true)
@@ -56,10 +61,10 @@ export default function Search(props) {
         log(query)
     }, [query, fetchData])
 
-    return <>
-        {(!isLoading && data.lengh === 0) && (<div className={styles.noResultContainer}>
+    const noResultJsx = () => {
+        return <div className={styles.noResultContainer}>
             <div className={styles.noResultImageC}>
-                {/* <img src={img} alt="" /> */}
+                <img src={noResultImage.src} alt="" />
             </div>
             <div className={styles.noResData}>
                 <p className={styles.noResTitle}>No Result Found</p>
@@ -70,7 +75,25 @@ export default function Search(props) {
                     </a>
                 </Link>
             </div>
-        </div>)}
+        </div>
+    }
+
+    const pagination = () => {
+        return <div className={paginationStyles.paginationCont}>
+            <div className={paginationStyles.paginationBtnCont}>
+                <Link href={`/search/${searchStr}`}>1</Link>
+                <Link href={`/search/${searchStr}?page=${(getPageNo() <= 1 ? 1 : getPageNo() - 1)}`}>Prev</Link>
+                <span>{getPageNo()}</span>
+                <Link href={`/search/${searchStr}?page=${(getPageNo() === totalPages ? totalPages : getPageNo() + 1)}`}>Next</Link>
+                <Link href={`/search/${searchStr}?page=${totalPages}`}>
+                    {totalPages}
+                </Link>
+            </div>
+        </div>
+    }
+
+    return <>
+        {noResult && noResultJsx()}
         {isLoading && <SongSkeleton count={perPageLimitResults} />}
         {data.length > 0 && !isLoading && <>
             <Title iconClass="fa-search" title={"Search result for " + pascalCase(searchStr)} />
@@ -85,19 +108,8 @@ export default function Search(props) {
                     />
                 })}
             </div>
-            {totalResults > perPageLimitResults && <div className={paginationStyles.paginationCont}>
-
-                <div className={paginationStyles.paginationBtnCont}>
-                    <Link href={`/search/${searchStr}`}>1</Link>
-                    <Link href={`/search/${searchStr}?page=${(getPageNo() <= 1 ? 1 : getPageNo() - 1)}`}>Prev</Link>
-                    <span>{getPageNo()}</span>
-                    <Link href={`/search/${searchStr}?page=${(getPageNo() === totalPages ? totalPages : getPageNo() + 1)}`}>Next</Link>
-                    <Link href={`/search/${searchStr}?page=${totalPages}`}>
-                        {totalPages}
-                    </Link>
-                </div>
-            </div>}
-            <OtherFeatures />
+            {totalResults > perPageLimitResults && pagination()}
         </>}
+        <OtherFeatures />
     </>
 }
