@@ -10,3 +10,12 @@ export const urlParams = () => {
         urlParams[decode(match[1])] = decode(match[2])
     return urlParams
 }
+
+export const copyToClipboard = text => navigator.clipboard.writeText(text)
+
+export const pascalCase = str => {
+    let arr = str.split(' ');
+    let temp = [];
+    arr.map((item) => temp.push(item.charAt(0).toUpperCase() + item.slice(1)))
+    return temp.join(' ')
+}
