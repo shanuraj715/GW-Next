@@ -49,7 +49,7 @@ function SignUp({ hide, openSignInModal }) {
     }
 
     const submitForm = useCallback(async () => {
-        // if (!validateForm()) return
+        if (!validateForm()) return
 
         const payload = {
             name, email, password, mobile
