@@ -52,7 +52,6 @@ export default function Category(props) {
             setTags(result.tags)
             setCategoryName(result.category_name)
             setBreadcrumb(result.breadcrumb)
-            log(result)
         }
         catch (err) {
             log(err)
