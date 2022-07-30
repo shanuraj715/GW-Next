@@ -45,7 +45,6 @@ function Header(props) {
     const logout = useCallback(async () => {
         try {
             const response = await getRequest('user/logout')
-            console.log(response)
             if(response.status){
                 dispatch({
                     type: 'user/updateLogged',
@@ -65,7 +64,6 @@ function Header(props) {
     }, [dispatch])
 
     return <header className={styles.header}>
-        {console.log(isLogged)}
         <div className={styles.headerLeft}>
             <Link href="/">
                 <a className={styles.headerImage}>
