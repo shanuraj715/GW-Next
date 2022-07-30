@@ -61,8 +61,6 @@ function SignUp({ hide, openSignInModal }) {
     const submitForm = useCallback(async () => {
         if (!validateForm()) return
 
-        console.log(email, name, email, password)
-
         const payload = {
             name, email, password, mobile
         }

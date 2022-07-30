@@ -59,7 +59,6 @@ function ResetPassword({ hide, openSignInModal }) {
     }
 
     const submitForm = () => {
-        console.log("Called")
         if (!validateForm()) return
 
         fetch(APP_INFO.API_URL + 'user/login', {
@@ -74,7 +73,6 @@ function ResetPassword({ hide, openSignInModal }) {
                 throw new Error("Error")
             })
             .then(json => {
-                console.log(json)
                 if (json.status) {
                     cookie.set('PHPSESSID', json.session_id, { path: '/' });
                     window.location.reload()
