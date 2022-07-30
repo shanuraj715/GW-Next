@@ -1,0 +1,38 @@
+@import "./variables.scss";
+
+/* 15 */
+.btn15 {
+  background: #2f3542 !important;
+  color: #fff !important;
+  z-index: 1;
+  font-size: 16px;
+
+  &:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background: #e0e5ec;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    color: $darkGreen !important;
+  }
+
+  &:hover:after {
+    left: 0;
+    width: 100%;
+  }
+
+  &:active {
+    top: 2px;
+  }
+}
+.sdBtnsCont {
+  text-align: center;
+  padding: 10px 5px;
+}

@@ -11,7 +11,9 @@ export const urlParams = () => {
     return urlParams
 }
 
-export const copyToClipboard = text => navigator.clipboard.writeText(text)
+export const copyToClipboard = text => {
+    navigator.clipboard.writeText(text)
+}
 
 export const pascalCase = str => {
     let arr = str.split(' ');

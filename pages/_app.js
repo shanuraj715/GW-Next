@@ -37,14 +37,8 @@ function MyApp({ Component, pageProps }) {
     setModals({ setAllFalse, [key]: bool })
   }
 
-  const setDataAttributeOnBody = () => {
-    const body = document.getElementsByTagName('body')
-    body[0].setAttribute('data-before', APP_INFO.APP_NAME)
-  }
-
   useEffect(() => {
     import('bootstrap/dist/js/bootstrap')
-    setDataAttributeOnBody()
   }, [])
 
   return <>
@@ -54,12 +48,12 @@ function MyApp({ Component, pageProps }) {
     <Header openSignInModal={() => toggleModals('signinVisible', true)} openSignUpModal={() => toggleModals('signupVisible', true)} />
     <MainLayout>
       <Component {...pageProps} />
+    
     </MainLayout>
     <Footer />
     {modals.signinVisible && <SignIn hide={() => toggleModals('signinVisible', false)} openSignUpModal={() => toggleModals('signupVisible', true)} openForgotPasswordModal={() => toggleModals('forgotPasswordVisible', true)} />}
     {modals.signupVisible && <SignUp hide={() => toggleModals('signupVisible', false)} openSignInModal={() => toggleModals('signinVisible', true)} />}
     {modals.forgotPasswordVisible && <ResetPassword hide={() => toggleModals('forgotPasswordVisible', false)} openSignInModal={() => toggleModals('signinVisible', true)} />}
-
     <Toaster />
   </>
 }
