@@ -35,7 +35,7 @@ function SignUp({ hide, openSignInModal }) {
         }
     }, [])
 
-    const validateForm = () => {
+    const validateForm = useCallback(() => {
         if (!validator.isEmail(email)) {
             toast.error("Please enter correct email address.", { position: 'bottom-left' })
             return false
@@ -56,7 +56,7 @@ function SignUp({ hide, openSignInModal }) {
             return false
         }
         return true
-    }
+    }, [email, mobile, name, password])
 
     const submitForm = useCallback(async () => {
         if (!validateForm()) return
@@ -79,7 +79,7 @@ function SignUp({ hide, openSignInModal }) {
         catch (err) {
             console.log(err)
         }
-    }, [email, name, mobile, password, openSignInModal])
+    }, [email, name, mobile, password, openSignInModal, validateForm])
 
     return (
         <div className={styles.formBg}>
