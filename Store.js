@@ -34,11 +34,8 @@ const StateProvider = props => {
         const { type, payload } = action
         const newState = clone(prevState)
 
-        console.log(clone(prevState))
-
         switch (type) {
             case ACTION.AUDIO.SET_FILE:
-                console.log(newState)
                 newState.audio.audioSrc = payload.url;
                 newState.audio.title = payload.title ?? '';
                 break

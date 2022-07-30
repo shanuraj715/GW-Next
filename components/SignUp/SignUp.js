@@ -1,20 +1,16 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import styles from '/styles/signInSignUp.module.scss'
 import Icon from '../../components/FontAwesome/FontAwesome'
-import Link from 'next/link'
 import image from '/assets/images/lr-bg.png'
 import OutsideClickHandler from 'react-outside-click-handler'
 import validator from 'validator'
 import toast from 'react-hot-toast'
-import { APP_INFO } from '/constants'
-import Cookie from 'universal-cookie'
 import { useRouter } from 'next/router'
-
-const cookie = new Cookie();
+import { postRequest } from '/extra/request'
 
 function SignUp({ hide, openSignInModal }) {
 
-    var time;
+    var time = useRef()
 
     const router = useRouter()
 
@@ -22,18 +18,20 @@ function SignUp({ hide, openSignInModal }) {
     const hideModal = () => {
         let elem = document.getElementById('form')
         elem.classList.add(styles.hideForm)
-        time = setTimeout(() => {
+        time.current = setTimeout(() => {
             elem.style.display = 'none'
             hide()
         }, 300)
     }
 
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    const [mobile, setMobile] = useState('')
     const [password, setPassword] = useState('')
 
     useEffect(() => {
         return () => {
-            clearTimeout(time)
+            clearTimeout(time.current)
         }
     })
 
@@ -50,35 +48,30 @@ function SignUp({ hide, openSignInModal }) {
         return true
     }
 
-    const submitForm = () => {
-        console.log("Called")
-        if (!validateForm()) return
+    const submitForm = useCallback(async () => {
+        // if (!validateForm()) return
 
-        fetch(APP_INFO.API_URL + 'user/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, password: password })
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                throw new Error("Error")
-            })
-            .then(json => {
-                console.log(json)
-                if (json.status) {
-                    cookie.set('PHPSESSID', json.session_id, { path: '/' });
-                    window.location.reload()
-                }
-                else {
-                    toast.error(json.error.message, { position: 'top-right' })
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
+        console.log(email, name, email, password)
+
+        const payload = {
+            name, email, password, mobile
+        }
+
+        try {
+            const response = await postRequest('user/register', payload);
+            if (response.status) {
+                toast.success('Registered Successfully', { position: 'bottom-left' })
+                toast.success("Please login to your account", { position: 'bottom-left' })
+                openSignInModal()
+            }
+            else {
+                toast.error(response.error.message)
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }, [email, name, mobile, password, openSignInModal])
 
     return (
         <div className={styles.formBg}>
@@ -95,11 +88,11 @@ function SignUp({ hide, openSignInModal }) {
                     <div className={styles.formData}>
                         <div className={`${styles.formInpRow} flex-column flex-md-row`}>
                             <input type="text" className={styles.lrFormInp}
-                                placeholder="Your Full Name" value={email}
-                                onChange={e => setEmail(e.target.value)} />
+                                placeholder="Your Full Name" value={name}
+                                onChange={e => setName(e.target.value)} />
                             <input type="text" className={styles.lrFormInp}
-                                placeholder="Your Mobile Number" value={email}
-                                onChange={e => setEmail(e.target.value)} />
+                                placeholder="Your Mobile Number" value={mobile}
+                                onChange={e => !isNaN(e.target.value) && setMobile(e.target.value.trim())} />
                         </div>
                         <div className={styles.formInpRow}>
                             <input type="text" className={styles.lrFormInp}
