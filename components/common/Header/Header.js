@@ -1,4 +1,4 @@
-import { useState, useContext, useCallback } from 'react'
+import { useState, useContext, useCallback, useReducer } from 'react'
 import styles from '/styles/header.module.scss'
 import Logo from '/assets/images/site_title_image.png'
 import Icon from '/components/FontAwesome/FontAwesome'
@@ -14,6 +14,8 @@ import { getRequest } from '/extra/request'
 function Header(props) {
 
     const router = useRouter()
+
+    const [_, forceUpdate] = useReducer(x => x + 1, 0)
 
     const {
         state: {
@@ -52,9 +54,10 @@ function Header(props) {
                         logged: false
                     }
                 })
-                toast.success("Successfully logged out", {position: 'bottom-right'})
+                forceUpdate()
+                toast.success("Successfully logged out", { position: 'bottom-right' })
             }
-            else{
+            else {
                 toast.error('An error occured')
             }
         }
@@ -100,10 +103,10 @@ function Header(props) {
                             <button className={`${styles.headerDropBtn} ${styles.dropBtnSignup}`} onClick={openSignUpModal}>Sign Up</button>
                         </>}
 
-                </div >
-            </div >
-        </div >
-    </header >
+                </div>
+            </div>
+        </div>
+    </header>
 }
 
 export default Header
