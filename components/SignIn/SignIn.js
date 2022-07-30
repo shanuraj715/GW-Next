@@ -76,7 +76,7 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
         catch (err) {
             console.log(err)
         }
-    }, [dispatch, email, password, hideModal])
+    }, [dispatch, email, password, hideModal, validateForm])
 
     return (
         <div className={styles.formBg}>
