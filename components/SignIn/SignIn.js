@@ -1,38 +1,35 @@
-import { useState, useEffect, useCallback, useContext } from 'react'
+import { useState, useEffect, useCallback, useContext, useRef } from 'react'
 import styles from '/styles/signInSignUp.module.scss'
 import Icon from '../../components/FontAwesome/FontAwesome'
-import Link from 'next/link'
 import image from '/assets/images/lr-bg.png'
 import OutsideClickHandler from 'react-outside-click-handler'
 import validator from 'validator'
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
 import { postRequest } from '/extra/request'
 import { AppContext } from '/Store'
 
 function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
 
-    var time;
-
-    const router = useRouter()
+    var time = useRef()
 
     const { state, dispatch } = useContext(AppContext)
 
-    const hideModal = () => {
+    const hideModal = useCallback(() => {
         let elem = document.getElementById('form')
         elem.classList.add(styles.hideForm)
-        time = setTimeout(() => {
+        time.current = setTimeout(() => {
             elem.style.display = 'none'
             hide()
         }, 300)
-    }
+    }, [hide])
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     useEffect(() => {
+        if (state.user.isLogged) window.reload()
         return () => {
-            clearTimeout(time)
+            clearTimeout(time.current)
         }
     })
 
@@ -59,7 +56,7 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
         }
         try {
             const response = await postRequest('/user/login', payload)
-            console.log( response )
+            console.log(response)
             if (response.status) {
                 dispatch({
                     type: 'user/updateLogged',
@@ -74,12 +71,12 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
             }
 
             hideModal()
-            toast.success("Login success!", {position: 'bottom-right'})
+            toast.success("Login success!", { position: 'bottom-right' })
         }
         catch (err) {
             console.log(err)
         }
-    }, [dispatch, email, password])
+    }, [dispatch, email, password, hideModal])
 
     return (
         <div className={styles.formBg}>
