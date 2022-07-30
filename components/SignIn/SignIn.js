@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useContext } from 'react'
 import styles from '/styles/signInSignUp.module.scss'
 import Icon from '../../components/FontAwesome/FontAwesome'
 import Link from 'next/link'
@@ -6,11 +6,9 @@ import image from '/assets/images/lr-bg.png'
 import OutsideClickHandler from 'react-outside-click-handler'
 import validator from 'validator'
 import toast from 'react-hot-toast'
-import { APP_INFO } from '/constants'
-import Cookie from 'universal-cookie'
 import { useRouter } from 'next/router'
-
-const cookie = new Cookie();
+import { postRequest } from '/extra/request'
+import { AppContext } from '/Store'
 
 function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
 
@@ -18,6 +16,7 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
 
     const router = useRouter()
 
+    const { state, dispatch } = useContext(AppContext)
 
     const hideModal = () => {
         let elem = document.getElementById('form')
@@ -38,6 +37,7 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
     })
 
     const validateForm = () => {
+        console.log(email)
         if (!validator.isEmail(email)) {
             toast.error("Please enter correct email address.", { position: 'top-right' })
             return false
@@ -50,35 +50,36 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
         return true
     }
 
-    const submitForm = () => {
-        console.log("Called")
-        if (!validateForm()) return
+    const submitForm = useCallback(async () => {
+        // console.log("Called")
+        // if (!validateForm()) return
 
-        fetch(APP_INFO.API_URL + 'user/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, password: password })
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                }
-                throw new Error("Error")
-            })
-            .then(json => {
-                console.log(json)
-                if (json.status) {
-                    cookie.set('PHPSESSID', json.session_id, { path: '/' });
-                    window.location.reload()
-                }
-                else {
-                    toast.error(json.error.message, { position: 'top-right' })
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
+        const payload = {
+            email: email, password: password
+        }
+        try {
+            const response = await postRequest('/user/login', payload)
+            console.log( response )
+            if (response.status) {
+                dispatch({
+                    type: 'user/updateLogged',
+                    payload: {
+                        logged: true,
+                        sessionId: response.session_id,
+                        email: response.data.email,
+                        username: response.data.name,
+                        userId: response.data.userId
+                    }
+                })
+            }
+
+            hideModal()
+            toast.success("Login success!", {position: 'bottom-right'})
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }, [dispatch, email, password])
 
     return (
         <div className={styles.formBg}>

@@ -18,3 +18,20 @@ export const LIMITS = {
 }
 
 export const OPERATION_CANCELED = 'OPERATION_CANCELED'
+
+export const ACTION = {
+    AUDIO: {
+        PLAY: "audio/play",
+        PAUSE: "audio/pause",
+        STOP: "audio/stop",
+        SET_FILE: "audio/setFile",
+        PLAY_FILE: "audio/playFile",
+        SET_VOLUME: "audio/setVolume",
+        SET_MUTE: "audio/setMute"
+    },
+    USER: {
+        UPDATE_LOGGED: "user/updateLogged",
+        SET_USERNAME: "user/username",
+        SET_EMAIL: "user/email"
+    }
+}

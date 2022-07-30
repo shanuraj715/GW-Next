@@ -21,3 +21,24 @@ export const pascalCase = str => {
     arr.map((item) => temp.push(item.charAt(0).toUpperCase() + item.slice(1)))
     return temp.join(' ')
 }
+
+export const clone = array => {
+    if (typeof obj == 'object') {
+        if (Array.isArray(array)) {
+            let l = array.length;
+            let r = new Array(l);
+            for (let i = 0; i < l; i++) {
+                r[i] = copyArray(array[i]);
+            }
+            return r;
+        } else {
+            let r = {};
+            r.prototype = array.prototype;
+            for (let k in array) {
+                r[k] = clone(array[k]);
+            }
+            return r;
+        }
+    }
+    return array;
+}

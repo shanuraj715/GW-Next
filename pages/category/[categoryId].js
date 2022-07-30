@@ -84,7 +84,6 @@ export default function Category(props) {
     }, [])
 
     useEffect(() => {
-        console.clear()
         fetchCategories()
         fetchSongs()
     }, [path, query, fetchCategories, fetchSongs])
