@@ -58,7 +58,6 @@ export default function Search(props) {
         setIsLoading(true)
         setSearchStr(query.searchText)
         fetchData()
-        log(query)
     }, [query, fetchData])
 
     const noResultJsx = () => {
