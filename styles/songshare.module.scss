@@ -1,0 +1,178 @@
+.songSharePc {
+  position: fixed !important;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: rgba(47, 53, 66, 0.4);
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.songShareCloseBtn {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -ms-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+
+  &:hover {
+    color: var(--dark-yellow);
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+  }
+}
+
+.songShareModal {
+  width: 450px;
+  background-color: #f1f2f6;
+  padding: 10px 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.songShareMt {
+  font-size: 32px;
+  /* text-align: center; */
+  font-weight: bold;
+  color: var(--dark-red);
+  cursor: default;
+  padding: 10px 0;
+  border-bottom: solid 1px #dfe4ea;
+}
+
+.ssCpyLinkBlock {
+  margin: 20px 0 10px 0;
+}
+
+.hytgj {
+  font-size: 22px;
+}
+
+.ssLinkTxtC {
+  padding: 5px;
+  border: solid 1px #dfe4ea;
+  margin-top: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.ssLink {
+  flex-grow: 2;
+}
+
+.ssLinkTxtC button {
+  padding: 2px 16px;
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+/* amiens effect */
+.amiens a {
+  transition: all 0.2s linear 0.2s;
+}
+
+.amiens a i {
+  transition: all 0.2s linear 0s;
+}
+
+.amiens a:hover {
+  transition: all 0.2s linear 0s;
+  border-color: rgba(33, 33, 33, 0);
+}
+
+.amiens a:hover i {
+  transform: scale(1.15);
+  transition: all 0.2s linear 0.2s;
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  -o-transform: scale(1.15);
+}
+
+/*==================================================
+ * Effect 2
+ * ===============================================*/
+.songShareModal {
+  position: relative;
+}
+
+.songShareModal:before,
+.songShareModal:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.songShareModal:after {
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
+/* BUTTON COLORS */
+
+.ssBtnFb {
+  color: #4267b2 !important;
+  border-color: #4267b2 !important;
+}
+
+.ssBtnWhatsapp {
+  color: #128c7e !important;
+  border-color: #128c7e !important;
+}
+
+.ssBtnTelegram {
+  color: #0088cc !important;
+  border-color: #0088cc !important;
+}
+
+.ssBtnSms {
+  color: #5bc236 !important;
+  border-color: #5bc236 !important;
+}
+
+.ssBtnInstagram {
+  color: var(--dark-red) !important;
+  border-color: var(--dark-red) !important;
+}

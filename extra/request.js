@@ -10,7 +10,7 @@ const handleResponse = (response) => {
         return response.data;
     }
     error("Logged from request.js:12")
-    return response;
+    return response.data;
 };
 
 export function handleError(error) {
@@ -18,6 +18,7 @@ export function handleError(error) {
         const cancelMessage = { message: OPERATION_CANCELED };
         throw cancelMessage;
     } else {
+        console.log(error)
         throw error.response;
     }
 }
@@ -29,7 +30,7 @@ export const cancelRequest = (endpoint) => {
     }
 };
 
-export const getRequest = (endpoint, params, cancelPrevious = true) => {
+export const getRequest = async (endpoint, params, cancelPrevious = true) => {
     if (
         cancelPrevious &&
         typeof cancelTokens[endpoint] !== typeof undefined &&
@@ -45,17 +46,20 @@ export const getRequest = (endpoint, params, cancelPrevious = true) => {
     if (API.URL) {
         url = `${API.URL}${endpoint}`;
     }
-    return axios({
-        method: 'get',
-        cancelToken: cancelTokens[endpoint].token,
-        url,
-        params,
-    })
-        .then(handleResponse)
-        .catch(handleError);
+    try {
+        const response = await axios({
+            method: 'get',
+            cancelToken: cancelTokens[endpoint].token,
+            url,
+            params,
+        });
+        return handleResponse(response);
+    } catch (error) {
+        return handleError(error);
+    }
 };
 
-export const postRequest = (endpoint, params, cancelPrevious = true) => {
+export const postRequest = async (endpoint, params, cancelPrevious = true) => {
     if (
         cancelPrevious &&
         typeof cancelTokens[endpoint] !== typeof undefined &&
@@ -71,12 +75,15 @@ export const postRequest = (endpoint, params, cancelPrevious = true) => {
     if (API.URL) {
         url = `${API.URL}${url}`;
     }
-    return axios({
-        method: 'post',
-        cancelToken: cancelTokens[endpoint].token,
-        url,
-        data: params,
-    })
-        .then(handleResponse)
-        .catch(handleError);
+    try {
+        const response = await axios({
+            method: 'post',
+            cancelToken: cancelTokens[endpoint].token,
+            url,
+            data: params,
+        });
+        return handleResponse(response);
+    } catch (error) {
+        return handleError(error);
+    }
 };
