@@ -47,7 +47,7 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
     }
 
     const submitForm = useCallback(async () => {
-        // if (!validateForm()) return
+        if (!validateForm()) return
 
         const payload = {
             email: email, password: password
