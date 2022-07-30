@@ -1,30 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import LatestUploads from '/components/LatestUploads/LatestUploads'
 import Title from '/components/common/SectionTitle/SectionTitle'
 import CategorySkeleton from '/components/common/Skeleton/CategorySkeleton'
 import CategoryCard from '/components/common/CategoryCard/CategoryCard'
 import OtherFeatures from '/components/common/OtherFeatures/OtherFeatures'
-import {getRequest} from '/extra/request'
+import { getRequest } from '/extra/request'
+import { AppContext } from '/Store'
 
 export default function Home() {
+
+  const {state, dispatch} = useContext(AppContext)
 
   const [categoryList, setCategoryList] = useState([])
   const [isCategoryLoading, setIsCategoryLoading] = useState(true)
 
-  const fetcgCategories = async () => {
-    try{
+  const fetchCategories = async () => {
+    try {
       const result = await getRequest('home_categories')
       setCategoryList(result.data)
       setIsCategoryLoading(false)
     }
-    catch( err ){
-      console.log( err )
+    catch (err) {
+      console.log(err)
     }
   }
 
   useEffect(() => {
-    fetcgCategories()
+    fetchCategories()
+    // dispatch({
+    //   type:"audio/setFile",
+    //   payload: {url: "p", title: "Are jo mrzi save kr do"}
+    // })
   }, [])
 
   return (

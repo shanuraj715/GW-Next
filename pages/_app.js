@@ -13,7 +13,7 @@ import SignIn from '/components/SignIn/SignIn'
 import SignUp from '/components/SignUp/SignUp'
 import ResetPassword from '/components/ResetPassword/ResetPassword'
 import '/styles/global.css'
-import {APP_INFO} from '/constants'
+import { StateProvider } from '/Store'
 
 // CUSTOM LOG
 import '/components/log/index'
@@ -45,16 +45,17 @@ function MyApp({ Component, pageProps }) {
     <Head>
       <link rel="icon" href="/favicon.png" />
     </Head>
-    <Header openSignInModal={() => toggleModals('signinVisible', true)} openSignUpModal={() => toggleModals('signupVisible', true)} />
-    <MainLayout>
-      <Component {...pageProps} />
-    
-    </MainLayout>
-    <Footer />
-    {modals.signinVisible && <SignIn hide={() => toggleModals('signinVisible', false)} openSignUpModal={() => toggleModals('signupVisible', true)} openForgotPasswordModal={() => toggleModals('forgotPasswordVisible', true)} />}
-    {modals.signupVisible && <SignUp hide={() => toggleModals('signupVisible', false)} openSignInModal={() => toggleModals('signinVisible', true)} />}
-    {modals.forgotPasswordVisible && <ResetPassword hide={() => toggleModals('forgotPasswordVisible', false)} openSignInModal={() => toggleModals('signinVisible', true)} />}
-    <Toaster />
+    <StateProvider>
+      <Header openSignInModal={() => toggleModals('signinVisible', true)} openSignUpModal={() => toggleModals('signupVisible', true)} />
+      <MainLayout>
+        <Component {...pageProps} />
+      </MainLayout>
+      <Footer />
+      {modals.signinVisible && <SignIn hide={() => toggleModals('signinVisible', false)} openSignUpModal={() => toggleModals('signupVisible', true)} openForgotPasswordModal={() => toggleModals('forgotPasswordVisible', true)} />}
+      {modals.signupVisible && <SignUp hide={() => toggleModals('signupVisible', false)} openSignInModal={() => toggleModals('signinVisible', true)} />}
+      {modals.forgotPasswordVisible && <ResetPassword hide={() => toggleModals('forgotPasswordVisible', false)} openSignInModal={() => toggleModals('signinVisible', true)} />}
+      <Toaster />
+    </StateProvider>
   </>
 }
 

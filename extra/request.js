@@ -1,6 +1,8 @@
 import { API, OPERATION_CANCELED } from '/constants'
 import axios from 'axios'
+import Cookie from 'universal-cookie'
 
+const cookies = new Cookie()
 const cancelTokens = {};
 
 const handleResponse = (response) => {
@@ -30,7 +32,7 @@ export const cancelRequest = (endpoint) => {
     }
 };
 
-export const getRequest = async (endpoint, params, cancelPrevious = true) => {
+export const getRequest = async (endpoint, params, headers = {}, cancelPrevious = true) => {
     if (
         cancelPrevious &&
         typeof cancelTokens[endpoint] !== typeof undefined &&
@@ -52,6 +54,10 @@ export const getRequest = async (endpoint, params, cancelPrevious = true) => {
             cancelToken: cancelTokens[endpoint].token,
             url,
             params,
+            headers: {
+                'sessid': cookies.get("PHPSESSID") ?? null,
+                ...headers,
+            }
         });
         return handleResponse(response);
     } catch (error) {
@@ -59,7 +65,7 @@ export const getRequest = async (endpoint, params, cancelPrevious = true) => {
     }
 };
 
-export const postRequest = async (endpoint, params, cancelPrevious = true) => {
+export const postRequest = async (endpoint, params, headers = {}, cancelPrevious = true) => {
     if (
         cancelPrevious &&
         typeof cancelTokens[endpoint] !== typeof undefined &&
@@ -73,7 +79,7 @@ export const postRequest = async (endpoint, params, cancelPrevious = true) => {
 
     let url = '';
     if (API.URL) {
-        url = `${API.URL}${url}`;
+        url = `${API.URL}${endpoint}`;
     }
     try {
         const response = await axios({
@@ -81,6 +87,10 @@ export const postRequest = async (endpoint, params, cancelPrevious = true) => {
             cancelToken: cancelTokens[endpoint].token,
             url,
             data: params,
+            headers: {
+                'sessid': cookies.get("PHPSESSID") ?? null,
+                ...headers,
+            }
         });
         return handleResponse(response);
     } catch (error) {
