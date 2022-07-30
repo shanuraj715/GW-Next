@@ -34,7 +34,6 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
     })
 
     const validateForm = () => {
-        console.log(email)
         if (!validator.isEmail(email)) {
             toast.error("Please enter correct email address.", { position: 'top-right' })
             return false
@@ -48,7 +47,6 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
     }
 
     const submitForm = useCallback(async () => {
-        // console.log("Called")
         // if (!validateForm()) return
 
         const payload = {
