@@ -33,23 +33,33 @@ function SignUp({ hide, openSignInModal }) {
         return () => {
             clearTimeout(time.current)
         }
-    })
+    }, [])
 
     const validateForm = () => {
         if (!validator.isEmail(email)) {
-            toast.error("Please enter correct email address.", { position: 'top-right' })
+            toast.error("Please enter correct email address.", { position: 'bottom-left' })
+            return false
+        }
+
+        if( !validator.isLength(name, { min: 1, max: 40 })){
+            toast.error("Please enter a valid name between 1 to 40 characters.", { position: 'bottom-left' });
+            return false
+        }
+
+        if( isNaN(mobile)){
+            toast.error("Please enter a valid mobile number.", { position: 'bottom-left' });
             return false
         }
 
         if (!validator.isLength(password, { min: 6, max: 32 })) {
-            toast.error("Incorrect password length", { position: 'top-right' });
+            toast.error("Incorrect password length.", { position: 'bottom-left' });
             return false
         }
         return true
     }
 
     const submitForm = useCallback(async () => {
-        // if (!validateForm()) return
+        if (!validateForm()) return
 
         console.log(email, name, email, password)
 

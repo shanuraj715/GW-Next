@@ -36,12 +36,12 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
     const validateForm = () => {
         console.log(email)
         if (!validator.isEmail(email)) {
-            toast.error("Please enter correct email address.", { position: 'top-right' })
+            toast.error("Please enter correct email address.", { position: 'bottom-left' })
             return false
         }
 
         if (!validator.isLength(password, { min: 6, max: 32 })) {
-            toast.error("Incorrect password length", { position: 'top-right' });
+            toast.error("Incorrect password length", { position: 'bottom-left' });
             return false
         }
         return true
@@ -49,7 +49,7 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
 
     const submitForm = useCallback(async () => {
         // console.log("Called")
-        // if (!validateForm()) return
+        if (!validateForm()) return
 
         const payload = {
             email: email, password: password
@@ -68,10 +68,12 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
                         userId: response.data.userId
                     }
                 })
+                hideModal()
+                toast.success("Login success!", { position: 'bottom-right' })
             }
-
-            hideModal()
-            toast.success("Login success!", { position: 'bottom-right' })
+            else {
+                toast.error(response.error.message, { position: 'bottom-right' })
+            }
         }
         catch (err) {
             console.log(err)
