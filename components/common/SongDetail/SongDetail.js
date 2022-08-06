@@ -10,7 +10,7 @@ export default function SongDetail(props) {
 
     const copy = () => {
         toast.success("Link copied to clipboard.", {position: 'bottom-left'})
-        copyToClipboard(APP_INFO.APP_URL + 's/' + data.short_url)
+        copyToClipboard(APP_INFO.SHORT_URL_PATH + data.short_url)
     }
 
     return <>
@@ -57,7 +57,7 @@ export default function SongDetail(props) {
                 <p className={styles.sdDataRow}>
                     <Icon type="regular" classes="fa-hand-point-right pd-r-6" />
                     <span className={`${styles.sdDataRt} mg-r-10`}>Short URL: </span>
-                    <span className={`${styles.sdDataRd} ${styles.sdShortLink}`}>{APP_INFO.APP_URL + 's/' + (data.short_url || '_____')}</span>
+                    <span className={`${styles.sdDataRd} ${styles.sdShortLink}`}>{APP_INFO.SHORT_URL_PATH + (data.short_url || '_____')}</span>
                     <span className={`pd-l-6 sd-data-lc-btn`} data-tip="Copy Link" onClick={copy}>
                         <Icon classes="fa-link" type="solid" />
                     </span>

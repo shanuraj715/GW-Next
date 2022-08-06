@@ -47,7 +47,7 @@ function Header(props) {
     const logout = useCallback(async () => {
         try {
             const response = await getRequest('user/logout')
-            if(response.status){
+            if (response.status) {
                 dispatch({
                     type: 'user/updateLogged',
                     payload: {
@@ -75,34 +75,35 @@ function Header(props) {
             </Link>
             <span>{APP_INFO.APP_SLOGAN}</span>
         </div>
-
-        <div className={styles.headerCenter}>
-            <div className={styles.headerSearchCont}>
-                <input type="text" placeholder="Search here..." value={string} onChange={e => setString(e.target.value)} onKeyPress={e => handleKeyPress(e)} />
-                <button onClick={handleSearchBtn}>
-                    <Icon type="solid" classes="fa-search" />
-                </button>
+        <div className="d-flex justify-content-center justify-content-md-end w-100">
+            <div className={styles.headerCenter}>
+                <div className={styles.headerSearchCont}>
+                    <input type="text" placeholder="Search here..." value={string} onChange={e => setString(e.target.value)} onKeyPress={e => handleKeyPress(e)} />
+                    <button onClick={handleSearchBtn}>
+                        <Icon type="solid" classes="fa-search" />
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <div className={styles.headerRight}>
-            <div className={styles.headerUserNavbar}>
-                <button className={styles.headerUserBtn}>
-                    <Icon type="solid" classes="fa-user" />
-                </button>
-                <div className={styles.headerUmDropdown}>
-                    <span className={styles.hddUsername}>{username ?? "*************"}</span>
+            <div className={styles.headerRight}>
+                <div className={styles.headerUserNavbar}>
+                    <button className={styles.headerUserBtn}>
+                        <Icon type="solid" classes="fa-user" />
+                    </button>
+                    <div className={styles.headerUmDropdown}>
+                        <span className={styles.hddUsername}>{username ?? "*************"}</span>
 
-                    {isLogged ?
-                        <>
-                            <button className={styles.huLink}>My Favorites</button>
-                            <button className={styles.huLink}>Profile Settings</button>
-                            <button className={`${styles.huLink} ${styles.huLogout}`} onClick={logout}>Logout</button>
-                        </> : <>
-                            <button className={`${styles.headerDropBtn} ${styles.dropBtnSignin}`} onClick={openSignInModal}>Sign In</button>
-                            <button className={`${styles.headerDropBtn} ${styles.dropBtnSignup}`} onClick={openSignUpModal}>Sign Up</button>
-                        </>}
+                        {isLogged ?
+                            <>
+                                <button className={styles.huLink}>My Favorites</button>
+                                <button className={styles.huLink}>Profile Settings</button>
+                                <button className={`${styles.huLink} ${styles.huLogout}`} onClick={logout}>Logout</button>
+                            </> : <>
+                                <button className={`${styles.headerDropBtn} ${styles.dropBtnSignin}`} onClick={openSignInModal}>Sign In</button>
+                                <button className={`${styles.headerDropBtn} ${styles.dropBtnSignup}`} onClick={openSignUpModal}>Sign Up</button>
+                            </>}
 
+                    </div>
                 </div>
             </div>
         </div>

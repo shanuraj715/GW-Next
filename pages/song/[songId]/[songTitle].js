@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useContext } from 'react'
 import { useRouter } from 'next/router'
 import Breadcrumb from '/components/common/Breadcrumb/Breadcrumb'
 import SongDetail from '/components/common/SongDetail/SongDetail'
@@ -14,46 +14,39 @@ import FourOhFour from '/components/404/FourOhFour'
 import SongShare from '/components/SongShare/SongShare'
 import { APP_INFO } from '/constants'
 import ReactTooltip from 'react-tooltip';
+import { AppContext } from '/Store'
 
 
 import { getRequest } from '/extra/request'
 
 export default function SongPage(props) {
 
+    const { state, dispatch } = useContext(AppContext)
+
     const router = useRouter()
     const query = router.query
 
-    const { data, error, message } = props
 
-    const songDataObj = {
-        thumb: data?.thumb,
-        songId: data?.song_id,
-        title: data?.title,
-        cat_id: data?.category_id,
-        cat_name: data?.category_name,
-        singer_id: data?.singer_id,
-        singer_name: data?.singer_name,
-        album_id: data?.album_id,
-        album_name: data?.album_name,
-        added_on: data?.added_date,
-        added_at: data?.added_time,
-        size: data?.size,
-        length: data?.length,
-        total_downloads: data?.total_downloads,
-        short_url: data?.short_url,
-        url_title: data?.url_title,
-        file_path: data?.file,
-        file_key: data?.file_key,
-    }
+    const { data, error, message, fetchAndPlay, isPlaying, audioId, play, pause } = props
 
-    const [songData, setSongData] = useState(songDataObj)
+    const [songData, setSongData] = useState({})
     const [tags, setTags] = useState(data?.tags ?? [])
     const [relatedFiles, setRelatedFiles] = useState(data?.related_files ?? [])
     const [breadcrumb, setBreadcrumb] = useState(data?.breadcrumb ?? [])
 
+    // console.log(props)
     const audioPlayHandler = () => {
+        if (isPlaying && audioId == songData.songId) {
+            pause()
+            return
+        }
+        if (!isPlaying && audioId === songData.songId) {
+            play()
+            return
+        }
         if (songData.songId) {
             // updateSid(parseInt(songData.songId))
+            fetchAndPlay(songData.songId)
         }
         else
             toast.error("Loading Data. Please wait...", { position: 'bottom-left' })
@@ -89,8 +82,51 @@ export default function SongPage(props) {
     }
 
     useEffect(() => {
+        console.log(data)
+        setSongData({
+            thumb: data?.thumb,
+            songId: data?.song_id,
+            title: data?.title,
+            cat_id: data?.category_id,
+            cat_name: data?.category_name,
+            singer_id: data?.singer_id,
+            singer_name: data?.singer_name,
+            album_id: data?.album_id,
+            album_name: data?.album_name,
+            added_on: data?.added_date,
+            added_at: data?.added_time,
+            size: data?.size,
+            length: data?.length,
+            total_downloads: data?.total_downloads,
+            short_url: data?.short_url,
+            url_title: data?.url_title,
+            file_path: data?.file,
+            file_key: data?.file_key,
+        })
 
-    }, [])
+        setTags(data.tags ?? [])
+        setRelatedFiles(data.related_files ?? [])
+        setBreadcrumb(data.breadcrumb ?? [])
+    }, [data])
+
+    const getPlayButtonText = () => {
+        if (isPlaying && audioId == songData.songId) {
+            return {
+                icon: 'fa-pause',
+                label: "Pause"
+            }
+        }
+        if (!isPlaying && audioId === songData.songId) {
+            return {
+                icon: 'fa-play',
+                label: "Continue"
+            }
+        }
+        return {
+            icon: 'fa-play',
+            label: "Play"
+        }
+    }
 
     return <>
         {!error && <>
@@ -98,8 +134,8 @@ export default function SongPage(props) {
             <SongDetail data={songData} />
             <div className={styles.sdBtnsCont}>
                 <button className={`${buttonStyles.customBtn} ${styles.btn15}`} onClick={audioPlayHandler}>
-                    <Icon classes="fa-play pd-r-10" type="solid" />
-                    Play Now
+                    <Icon classes={`${getPlayButtonText().icon} pd-r-10`} type="solid" />
+                    {getPlayButtonText().label}
                 </button>
                 <button className={`${buttonStyles.customBtn} ${styles.btn15}`} onClick={download}>
                     <Icon classes="fa-download pd-r-10" type="solid" />
@@ -142,7 +178,7 @@ export async function getServerSideProps(context) {
         id: songId,
     }
     const response = await getRequest('song', params)
-
+    console.log(response)
     if (response.status) {
         return {
             props: {

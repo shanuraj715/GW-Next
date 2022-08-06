@@ -1,21 +1,30 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
 .categoryCard {
   padding: 8px 25px;
   display: flex;
   align-items: center;
   text-decoration: none;
   border-bottom: solid 1px red;
-}
-.categoryCard:hover {
-  background-image: linear-gradient(
-    to right,
-    rgba(250, 130, 49, 0.2),
-    transparent
-  );
-}
-.categoryCard span:first-child {
-  font-size: 20px;
-}
 
-.categoryCard span:nth-child(2) {
-  padding: 0 15px;
+  @include for-mobile {
+    padding: 5px 10px;
+  }
+
+  &:hover {
+    background-image: linear-gradient(
+      to right,
+      rgba(250, 130, 49, 0.2),
+      transparent
+    );
+  }
+
+  span:first-child {
+    font-size: 20px;
+  }
+
+  span:nth-child(2) {
+    padding: 0 15px;
+  }
 }
