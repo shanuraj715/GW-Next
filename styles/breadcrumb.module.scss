@@ -1,9 +1,15 @@
 @import "./variables.scss";
+@import "./mixins.scss";
 
 .breadcrumbCont {
   background-color: $lightWhite;
   border-bottom: solid 1px $darkRed;
   padding: 6px 25px;
+
+  @include for-mobile {
+    padding: 4px 5px;
+    font-size: 0.9rem;
+  }
 }
 
 .breadcrumbSap {

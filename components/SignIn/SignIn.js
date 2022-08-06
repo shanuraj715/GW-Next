@@ -10,7 +10,7 @@ import { AppContext } from '/Store'
 
 function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
 
-    var time = useRef()
+    var time = useRef(null)
 
     const { state, dispatch } = useContext(AppContext)
 
@@ -27,13 +27,13 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
     const [password, setPassword] = useState('')
 
     useEffect(() => {
-        if (state.user.isLogged) window.reload()
+        // if (state.user.isLogged) window.reload()
         return () => {
-            clearTimeout(time.current)
+            // clearTimeout(time.current)
         }
     })
 
-    const validateForm = () => {
+    const validateForm = useCallback(() => {
         if (!validator.isEmail(email)) {
             toast.error("Please enter correct email address.", { position: 'bottom-left' })
             return false
@@ -44,7 +44,7 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
             return false
         }
         return true
-    }
+    }, [email, password])
 
     const submitForm = useCallback(async () => {
         if (!validateForm()) return

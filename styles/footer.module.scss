@@ -1,4 +1,5 @@
 @import "./variables.scss";
+@import "./mixins.scss";
 
 .footer {
   text-align: center;
@@ -29,7 +30,7 @@
   background: rgba(47, 54, 64, 0.6);
   position: fixed;
   top: 0;
-  z-index: 200;
+  z-index: 300;
   min-width: 100%;
 }
 

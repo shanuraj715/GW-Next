@@ -1,4 +1,5 @@
 @import "./variables.scss";
+@import "./mixins.scss";
 
 .otherFeaturesCont {
   padding-bottom: 15px;
@@ -7,6 +8,10 @@
 .otherFeatureLinks {
   padding: 0 15px;
   margin-top: 15px !important;
+
+  @include for-mobile {
+    text-align: center;
+  }
 }
 
 .customBtn {
@@ -23,6 +28,10 @@
   display: inline-block;
   margin: 10px 15px !important;
   color: $darkBlack;
+
+  @include for-mobile {
+    margin: 4px 8px !important;
+  }
 }
 
 .customBtn:hover {

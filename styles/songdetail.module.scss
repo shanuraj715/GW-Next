@@ -1,6 +1,14 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
 .songDetailCont {
   display: flex;
   padding: 15px 25px;
+
+  @include for-mobile {
+    flex-direction: column;
+    padding: 10px 5px;
+  }
 }
 
 .sdLeft {
@@ -14,6 +22,12 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+
+  @include for-mobile {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+  }
 }
 
 .sdLeft img {
@@ -25,6 +39,10 @@
   padding: 0 10px;
   flex-grow: 2;
   align-items: center;
+
+  @include for-mobile {
+    padding: 0;
+  }
 }
 
 .sdRight {
@@ -45,6 +63,11 @@
   font-size: 18px;
   color: var(--light-white);
   min-width: 400px;
+
+  @include for-mobile {
+    min-width: initial;
+    font-size: 1rem;
+  }
 }
 
 .sdDataRow {

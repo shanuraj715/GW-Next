@@ -2,8 +2,13 @@ import { createContext, useReducer, useRef } from 'react';
 import { clone } from '/extra/utils'
 import { ACTION } from '/constants'
 import Cookie from 'universal-cookie'
+// import audio, { fetchAudioData } from '/extra/Audio'
+import { getRequest } from '/extra/request'
+import toast from 'react-hot-toast'
+
 
 const cookies = new Cookie()
+
 
 const initialState = {
     audio: {
@@ -16,6 +21,9 @@ const initialState = {
         mute: false,
         title: '',
         repeat: false,
+        isFavorite: false,
+        audioData: {},
+        audioId: null
     },
     user: {
         isLogged: false,
@@ -33,7 +41,6 @@ const StateProvider = props => {
     const [state, dispatch] = useReducer((prevState, action) => {
         const { type, payload } = action
         const newState = clone(prevState)
-
         switch (type) {
             case ACTION.AUDIO.SET_FILE:
                 newState.audio.audioSrc = payload.url;
@@ -42,9 +49,27 @@ const StateProvider = props => {
 
             case ACTION.AUDIO.PLAY:
                 newState.audio.play = payload.play
+
+
+                break
+            case ACTION.AUDIO.PAUSE:
+
+                break
+            case ACTION.AUDIO.STOP:
+
+                break
+            case ACTION.AUDIO.SET_VOLUME:
+
+                break;
+            case ACTION.AUDIO.SET_MUTE:
+                console.log(audioObj )
+                audioObj.muted = payload.mute
+                newState.audio.mute = payload.mute
                 break
 
-
+            case ACTION.AUDIO.PLAY_FILE:
+                setAndPlay(payload.id)
+                break
 
 
             case ACTION.USER.UPDATE_LOGGED:
@@ -62,6 +87,11 @@ const StateProvider = props => {
                     newState.user.username = ''
                     newState.user.userId = ''
                 }
+                break
+
+            case ACTION.USER.SET_USERNAME:
+                break
+            case ACTION.USER.SET_EMAIL:
                 break
             default:
                 log("Pta nhi kya hi hoga hamara")

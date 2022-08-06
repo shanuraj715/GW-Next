@@ -1,0 +1,53 @@
+/*BREAKPOINTS*/
+@mixin for-small-mobile {
+  @media (max-width: 374px) {
+    @content;
+  }
+}
+@mixin for-mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+@mixin for-mobile-landscape {
+  @media only screen and (min-device-width: 601px) and (max-device-width: 766px) and (orientation: landscape) {
+    @content;
+  }
+}
+@mixin for-Tablet {
+  @media (min-width: 768px) and (max-width: 992px) {
+    @content;
+  }
+}
+@mixin for-desktop {
+  @media (min-width: 993px) and (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin for-mid-large-screen {
+  @media (min-width: 1200px) and (max-width: 1300px) {
+    @content;
+  }
+}
+
+@mixin for-large-screen {
+  @media (min-width: 1201px) {
+    @content;
+  }
+}
+@mixin for-desktop-and-above {
+  @media (min-width: 993px) {
+    @content;
+  }
+}
+@mixin marginPadding0 {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin flexAlignment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
