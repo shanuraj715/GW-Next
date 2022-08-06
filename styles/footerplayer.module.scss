@@ -93,6 +93,16 @@
   align-items: center;
   border-right: solid 1px #576574;
   overflow: hidden;
+
+  @include for-mobile {
+    width: initial;
+    min-width: initial;
+    max-width: initial;
+    flex-grow: 2;
+  }
+  @include for-Tablet {
+    flex-grow: 2;
+  }
 }
 
 .mpLeftBtnCont {
@@ -159,9 +169,22 @@
   min-width: 33.33%;
   max-width: 33.33%;
   text-align: center;
-  padding: 17px 10px;
+  padding: 10px 10px;
   min-width: 400px;
   border-right: solid 1px #576574;
+
+  @include for-mobile {
+    width: initial;
+    min-width: initial;
+    max-width: initial;
+    flex-grow: initial;
+  }
+  @include for-Tablet {
+    width: initial;
+    min-width: initial;
+    max-width: initial;
+    flex-grow: initial;
+  }
 }
 
 .mpRight {
@@ -291,4 +314,10 @@
 .mpPlayBtn {
   font-size: 24px;
   color: var(--dark-red);
+}
+
+.footerAdContainer {
+  @include for-Tablet {
+    display: none;
+  }
 }

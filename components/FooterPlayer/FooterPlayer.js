@@ -7,11 +7,14 @@ import { APP_INFO } from '/constants'
 import { AppContext } from '/Store'
 import adholder from '/assets/images/320x50.png'
 import { secToMinSec } from '/extra/utils'
+import GetDeviceInfo from '/extra/GetDeviceInfo/GetDeviceInfo'
 
 export default function FooterPlayer(props) {
 
     const [isExpanded, setIsExpanded] = useState(false)
     const [maxScrubberVal, setMaxScrubberVal] = useState(100)
+
+    const { isDesktop } = GetDeviceInfo()
 
     const { state: {
         user: {
@@ -103,61 +106,75 @@ export default function FooterPlayer(props) {
 
                         {/* <span>Song title here</span> */}
                     </div>
-                    <div className={styles.mpLeftBtnCont}>
-                        <span data-tip={`${isFavorite ? "Remove from favourites" : "Add to favourites"}`} className={`${styles.mpLeftBtn} ${styles.mpFavBtn}`} onClick={toggleFavorite}>
-                            <Icon type={`${isFavorite ? 'solid' : 'regular'}`} classes="fa-heart" />
-                        </span>
-                        <span data-tip="Download this song." className={`${styles.mpLeftBtn} ${styles.mpDownloadBtn}`} onClick={download}>
-                            <Icon type="regular" classes="fa-download" />
-                        </span>
-                    </div>
+
+                    {isDesktop &&
+                        <div className={styles.mpLeftBtnCont}>
+                            <span data-tip={`${isFavorite ? "Remove from favourites" : "Add to favourites"}`} className={`${styles.mpLeftBtn} ${styles.mpFavBtn}`} onClick={toggleFavorite}>
+                                <Icon type={`${isFavorite ? 'solid' : 'regular'}`} classes="fa-heart" />
+                            </span>
+                            <span data-tip="Download this song." className={`${styles.mpLeftBtn} ${styles.mpDownloadBtn}`} onClick={download}>
+                                <Icon type="regular" classes="fa-download" />
+                            </span>
+                        </div>
+                    }
                 </div>
                 <div className={styles.mpCenter}>
-                    <div className={styles.mpTime}>
-                        <span id="current-time" className={styles.mpCurrentTime} data-tip="Current Time">{`${secToMinSec(currentTime).min}:${secToMinSec(currentTime).sec}`}</span>
-                        <span> / </span>
-                        <span className={styles.mpDurationTime} data-tip="Total Duration">{`${secToMinSec(duration).min}:${secToMinSec(duration).sec}`}</span>
-                    </div>
+                    {isDesktop &&
+                        <>
+                            <div className={styles.mpTime}>
+                                <span id="current-time" className={styles.mpCurrentTime} data-tip="Current Time">{`${secToMinSec(currentTime).min}:${secToMinSec(currentTime).sec}`}</span>
+                                <span> / </span>
+                                <span className={styles.mpDurationTime} data-tip="Total Duration">{`${secToMinSec(duration).min}:${secToMinSec(duration).sec}`}</span>
+                            </div>
 
-                    <span className={styles.mpControlBtn} onClick={repeatHandler}>
-                        <Icon classes={repeat ? 'fa-repeat-1-alt' : 'fa-repeat'} type="regular" />
-                    </span>
+                            <span className={styles.mpControlBtn} onClick={repeatHandler}>
+                                <Icon classes={repeat ? 'fa-repeat-1-alt' : 'fa-repeat'} type="regular" />
+                            </span>
 
-                    <span className={styles.mpControlBtn}>
-                        <Icon classes="fa-angle-double-left" type="regular" />
-                    </span>
+                            <span className={styles.mpControlBtn}>
+                                <Icon classes="fa-angle-double-left" type="regular" />
+                            </span>
+                        </>
+                    }
 
                     <span className={`${styles.mpControlBtn} ${styles.mpPlayBtn}`} onClick={isPlaying ? pauseHandler : playHandler}>
                         <Icon classes={`${isPlaying ? 'fa-pause' : 'fa-play'}`} type="regular" />
                     </span>
+                    {isDesktop &&
+                        <>
+                            <span className={styles.mpControlBtn}>
+                                <Icon classes="fa-angle-double-right" type="regular" />
+                            </span>
 
-                    <span className={styles.mpControlBtn}>
-                        <Icon classes="fa-angle-double-right" type="regular" />
-                    </span>
+                            <span className={styles.mpControlBtn} data-tip="Copy link (Ctrl + c)" onClick={copyHandler}>
+                                <Icon classes="fa-link" type="regular" />
+                            </span>
 
-                    <span className={styles.mpControlBtn} data-tip="Copy link (Ctrl + c)" onClick={copyHandler}>
-                        <Icon classes="fa-link" type="regular" />
-                    </span>
+                            <span className={`${styles.mpControlBtn} ${styles.mpVolumeBtn}`}>
+                                <div className={styles.mpVcCont}>
+                                    <input data-tip data-for="vol-cont-tip" id="volume-controller" type="range" className={styles.mpVc} min="0" max="100" value={audioObject.volume * 100} onChange={e => volumeController(e)} />
+                                </div>
+                                {/* <span>{volume}</span> */}
 
-                    <span className={`${styles.mpControlBtn} ${styles.mpVolumeBtn}`}>
-                        <div className={styles.mpVcCont}>
-                            <input data-tip data-for="vol-cont-tip" id="volume-controller" type="range" className={styles.mpVc} min="0" max="100" value={audioObject.volume * 100} onChange={e => volumeController(e)} />
-                        </div>
-                        {/* <span>{volume}</span> */}
-
-                        <span onClick={() => { muteAudio() }}><Icon classes={`${audioObject.muted ? 'fa-volume-slash' : 'fa-volume-up'}`} type="regular" /></span>
-                    </span>
+                                <span onClick={() => { muteAudio() }}><Icon classes={`${audioObject.muted ? 'fa-volume-slash' : 'fa-volume-up'}`} type="regular" /></span>
+                            </span>
+                        </>
+                    }
                 </div>
-                <div className={styles.mpRight}>
-                    {/* <span data-tip={ this.props.isLogged ? "Next song." : 'Login'} className={styles.mp-next-song">
+                {isDesktop &&
+                    <div className={styles.mpRight}>
+                        {/* <span data-tip={ this.props.isLogged ? "Next song." : 'Login'} className={styles.mp-next-song">
 							{ this.props.isLogged ? "Next song name here" : 'Login to get favourite tracks.'}
 						</span> */}
-                    <img src={adholder.src} alt="" />
+                        <div className={styles.footerAdContainer}>
+                            <img src={adholder.src} alt="" />
+                        </div>
 
-                    <span className={styles.mpExpandBtn} onClick={() => { }}>
-                        <Icon classes="fa-expand" type="regular" />
-                    </span>
-                </div>
+                        <span className={styles.mpExpandBtn} onClick={() => { }}>
+                            <Icon classes="fa-expand" type="regular" />
+                        </span>
+                    </div>
+                }
             </div>}
     </>
 }

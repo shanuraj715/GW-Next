@@ -34,6 +34,9 @@
   text-align: right;
   margin: auto 40px;
 
+  @include for-Tablet {
+    margin: auto 5px;
+  }
   @include for-mobile {
     margin: auto 5px;
   }
@@ -44,6 +47,9 @@
   padding-left: 10px;
   padding-right: 2%;
 
+  @include for-Tablet {
+    padding-left: 5px;
+  }
   @include for-mobile {
     padding-left: 5px;
   }
@@ -201,7 +207,7 @@
     background-color: $darkWhite;
     font-family: "Courgette", cursive;
 
-    @include for-mobile {
+    @include for-Tablet {
       min-width: 260px;
       width: 100%;
     }

@@ -5,6 +5,11 @@
   display: flex;
   padding: 15px 25px;
 
+  @include for-Tablet {
+    flex-direction: column;
+    padding: 10px 5px;
+  }
+
   @include for-mobile {
     flex-direction: column;
     padding: 10px 5px;
@@ -22,6 +27,12 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+
+  @include for-Tablet {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+  }
 
   @include for-mobile {
     margin-left: auto;
