@@ -4,10 +4,13 @@ import styles from '/styles/footer.module.scss'
 import sr from '/assets/images/sr.jpg'
 import Icon from '/components/FontAwesome/FontAwesome'
 import OutsideClickHandler from 'react-outside-click-handler'
+import GetDeviceInfo from '/extra/GetDeviceInfo/GetDeviceInfo'
 
 function Footer(props) {
 
     const [cardVisible, setCardVisible] = useState(false)
+
+    const {isDesktop} = GetDeviceInfo()
 
     const toggleCardVisibility = () => {
         setCardVisible(!cardVisible)
@@ -66,7 +69,7 @@ function Footer(props) {
                 <span>Copyright © 2018 - {new Date().getFullYear()} | {APP_INFO.APP_NAME + ' v-' + APP_INFO.VERSION} </span>
                 <span>- Developed By: <span onClick={toggleCardVisibility} className={styles.footerDevName}>Shanu Raj</span></span>
             </p>
-            {cardVisible && devCard()}
+            {cardVisible && isDesktop && devCard()}
         </div >
     )
 
