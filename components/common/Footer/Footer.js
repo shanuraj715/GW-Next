@@ -66,7 +66,7 @@ function Footer(props) {
                 <span>Copyright © 2018 - {new Date().getFullYear()} | {APP_INFO.APP_NAME + ' v-' + APP_INFO.VERSION} </span>
                 <span>- Developed By: <span onClick={toggleCardVisibility} className={styles.footerDevName}>Shanu Raj</span></span>
             </p>
-            {cardVisible ? devCard() : null}
+            {cardVisible  && devCard()}
         </div >
     )
 
