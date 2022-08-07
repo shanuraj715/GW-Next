@@ -1,0 +1,47 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.normalMessage {
+  text-align: center;
+  font-size: 2rem;
+  background: linear-gradient(to right, rgb(0, 174, 255), rgb(255, 31, 31));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.errorMessage {
+  text-align: center;
+  font-size: 2rem;
+  background: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 174, 0));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.errorImage {
+  width: 450px;
+}
+
+.homeBtn {
+  border: solid 2px rgb(0, 181, 187);
+  padding: 8px 25px;
+  text-decoration: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  font-weight: bold;
+  color: $darkBlue;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
