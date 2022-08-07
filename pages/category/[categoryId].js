@@ -18,7 +18,7 @@ import OtherFeatures from '/components/common/OtherFeatures/OtherFeatures'
 
 export default function Category(props) {
 
-    const {data, error, message} = props
+    const { data, error, message } = props
 
     const router = useRouter()
     const path = router.asPath
@@ -65,21 +65,25 @@ export default function Category(props) {
         }
     }, [])
 
+    console.log(data)
+
     useEffect(() => {
         setCategories(data.data)
         setCategoryName(data.category_name)
         setBreadcrumb(data.breadcrumb)
         fetchSongs()
+        console.log(data.tags)
         setTags(data.tags)
         setPageMeta({
             title: `${data.breadcrumb[data.breadcrumb.length - 1].title} - ${APP_INFO.APP_NAME}`,
-            image: '',
-            description: ''
+            image: '/favicon.png',
+            description: `Download all songs of ${data.category_name} on your device and enjoy. All songs are availabe in high quality.`,
+            keywords: `${data.tags} mp3, downlod, all songs download`
         })
     }, [path, query, fetchSongs, data])
 
     return <>
-    <SocialMeta data={pageMeta} />
+        <SocialMeta data={pageMeta} />
         <Breadcrumb data={breadcrumb} />
         {categories.length > 0 && pageNo === 1 && <div className={styles.cCatCont}>
             <Title iconClass="fa-guitar-electric" title={'Categories of ' + categoryName} />
@@ -125,18 +129,18 @@ export default function Category(props) {
                         </div>}
                 </div>
             </div>
-            {tags.length > 0 && <Tags data={tags} />}
-            <OtherFeatures />
         </>}
+        {tags.length > 0 && <Tags data={tags} />}
+        <OtherFeatures />
     </>
 }
 
-export async function getServerSideProps(context){
+export async function getServerSideProps(context) {
     const payload = {
         id: context.query.categoryId
     }
     const response = await getRequest('category', payload)
-    if(response.status){
+    if (response.status) {
         return {
             props: {
                 data: response

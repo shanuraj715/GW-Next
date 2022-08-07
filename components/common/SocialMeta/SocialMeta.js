@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 function SocialMeta(props) {
   const {
-    data: { url = '', title = '', image = '', description = '', pageIndex = 'index', linkFollow = "follow" },
+    data: { url = '', title = '', image = '', description = '', pageIndex = 'index', linkFollow = "follow", keywords = '' },
   } = props;
 
   return (
@@ -57,6 +57,11 @@ function SocialMeta(props) {
       </>
     )
   }
+  {keywords && (
+    <>
+    <meta name="keywords" content={keywords} />
+    </>
+  )}
     </Head >
   );
 }
