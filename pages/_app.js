@@ -38,7 +38,6 @@ function MyApp({ Component, pageProps }) {
   const [modals, setModals] = useState({ ...allModals })
 
   const toggleModals = (key, bool) => {
-    console.log("EXEC")
     const oldStateOfModals = { ...modals };
     let setAllFalse = {};
     Object.keys(oldStateOfModals).forEach(key => {
@@ -71,7 +70,6 @@ function MyApp({ Component, pageProps }) {
     const payload = { id: id }
     try {
       const response = await getRequest('song', payload)
-      console.log(response)
       if (response.status) {
         setAudioId(response.data.song_id)
         setAudioData(response.data)
@@ -104,34 +102,29 @@ function MyApp({ Component, pageProps }) {
   }
 
   const play = () => {
-    console.log("Play function called")
     audio.current.play()
   }
 
   const pause = () => {
-    console.log("Pause function called")
     audio.current.pause()
   }
 
   const loop = (bool) => {
-    console.log("Loop function called")
     audio.current.loop = bool ?? true
   }
 
   const volumeController = (event) => {
-    console.log("Volume function called")
     const value = ((event.target.value - 0) / 100) * 100
-    console.log(value)
     audio.current.volume = value / 100
   }
 
   const stop = () => {
-    console.log("Stop function called")
     audio.current.pause()
     audio.current.currentTime = 0
   }
 
   const seek = (value) => {
+    console.log(audioData)
     console.log(value)
     audio.current.currentTime = value
   }
@@ -179,7 +172,7 @@ function MyApp({ Component, pageProps }) {
       setIsPlaying(true)
       interval.current = setInterval(() => {
         setCurrentTime(audio.current.currentTime)
-      }, 200)
+      }, 1000)
     }
     audio.current.onpause = () => {
       setIsPlaying(false)

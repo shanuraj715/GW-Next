@@ -70,7 +70,7 @@ function Header(props) {
         <div className={styles.headerLeft}>
             <Link href="/">
                 <a className={styles.headerImage}>
-                    <Image src={Logo} alt="" />
+                    {/* <Image src={Logo} alt="" /> */}
                 </a>
             </Link>
             <span>{APP_INFO.APP_SLOGAN}</span>

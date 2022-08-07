@@ -72,7 +72,7 @@ export default function FooterPlayer(props) {
 
     const seekHandler = (event) => {
         console.log(event.target.value)
-        seek(event.target.value / 100)
+        seek(event.target.value)
     }
 
     const repeatHandler = () => {
@@ -89,7 +89,7 @@ export default function FooterPlayer(props) {
         {!isExpanded &&
             <div className={styles.musicPlayer} id={styles.footerPlayer}>
                 <div className={styles.mpSeek}>
-                    <input data-for="scrubber-inp" data-tip type="range" min="0" max={duration * 100 ?? 0} id="scrubber" onChange={(e) => { seekHandler(e) }} value={(progressbarCurrentTime ?? 0) * 100} />
+                    <input data-for="scrubber-inp" data-tip type="range" min="0" max={duration ?? 0} id="scrubber" onChange={(e) => { seekHandler(e) }} value={(progressbarCurrentTime ?? 0)} />
 
                 </div>
                 <div className={styles.mpLeft}>
