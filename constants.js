@@ -5,7 +5,8 @@ export const APP_INFO = {
     APP_DESCRIPTION: "Download all latest mp3 songs. All Original, Dj and Remixed songs is available on our website. Download high quality mp3 songs. Bollywood, Punjabi, Bhojpuri, Haryanavi and many more language songs.",
     DOWNLOAD_SERVER_URL: 'https://mp3.techfacts007.in/file/',
     VERSION: '1.0',
-    SHORT_URL_PATH: 'http://localhost:3005/s/'
+    SHORT_URL_PATH: 'http://localhost:3005/s/',
+    ADMIN_PAGE: 'https://gaanaworld-admin.techfacts007.in/'
 }
 
 export const API = {
