@@ -82,7 +82,6 @@ export default function SongPage(props) {
     }
 
     useEffect(() => {
-        console.log(data)
         setSongData({
             thumb: data?.thumb,
             songId: data?.song_id,
@@ -178,7 +177,6 @@ export async function getServerSideProps(context) {
         id: songId,
     }
     const response = await getRequest('song', params)
-    console.log(response)
     if (response.status) {
         return {
             props: {

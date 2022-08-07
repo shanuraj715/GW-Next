@@ -35,7 +35,7 @@ function Footer(props) {
                 <div className={styles.card__content}>
                     <h1 className={styles.card__title}>Shanu Raj</h1>
                     <p>I am a Full Stack Professional Web Developer.<br />
-                        I am expert in <strong>HTML, CSS, JavaScript, jQuery, PHP, SQL, React Js, Express Js, Node Js, MongoDB, Python and Wordpress.</strong><br /><br />
+                        I am expert in <strong>HTML, CSS, JavaScript, jQuery, PHP, SQL, React Js, Next Js, Express Js, Node Js, MongoDB, Python and Wordpress.</strong><br /><br />
                         Contact me for website development.<br />
                         Mob: +91-9877936035</p>
                     <div className={`${styles.effect} ${styles.varrius}`}>

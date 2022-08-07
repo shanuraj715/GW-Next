@@ -7,10 +7,10 @@ import CategoryCard from '/components/common/CategoryCard/CategoryCard'
 import OtherFeatures from '/components/common/OtherFeatures/OtherFeatures'
 import { getRequest } from '/extra/request'
 import { AppContext } from '/Store'
+import SocialMeta from '/components/common/SocialMeta/SocialMeta'
+import {APP_INFO} from '/constants'
 
 export default function Home() {
-
-  const {state, dispatch} = useContext(AppContext)
 
   const [categoryList, setCategoryList] = useState([])
   const [isCategoryLoading, setIsCategoryLoading] = useState(true)
@@ -28,14 +28,17 @@ export default function Home() {
 
   useEffect(() => {
     fetchCategories()
-    // dispatch({
-    //   type:"audio/setFile",
-    //   payload: {url: "p", title: "Are jo mrzi save kr do"}
-    // })
   }, [])
+
+  const pageMeta = {
+    title: APP_INFO.APP_NAME,
+    image: '/favicon.png',
+    description: APP_INFO.APP_DESCRIPTION,
+  }
 
   return (
     <>
+    <SocialMeta data={pageMeta} />
       <LatestUploads />
       <div className="home-categories">
 

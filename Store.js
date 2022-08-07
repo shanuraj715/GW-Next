@@ -62,7 +62,6 @@ const StateProvider = props => {
 
                 break;
             case ACTION.AUDIO.SET_MUTE:
-                console.log(audioObj )
                 audioObj.muted = payload.mute
                 newState.audio.mute = payload.mute
                 break
