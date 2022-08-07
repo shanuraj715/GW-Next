@@ -6,16 +6,19 @@ import CategoryCard from '/components/common/CategoryCard/CategoryCard'
 import Title from '/components/common/SectionTitle/SectionTitle'
 import styles from '/styles/categorylist.module.scss'
 import { useRouter } from 'next/router'
-import { LIMITS } from '/constants'
+import { LIMITS, APP_INFO } from '/constants'
 import { urlParams } from '/extra/utils'
 import SongSkeleton from '/components/common/Skeleton/SongSkeleton'
 import SongCard from '/components/common/SongCard/SongCard'
 import Link from 'next/link'
 import paginationStyles from '/styles/pagination.module.scss'
 import Tags from '/components/common/Tags/Tags'
+import SocialMeta from '/components/common/SocialMeta/SocialMeta'
 import OtherFeatures from '/components/common/OtherFeatures/OtherFeatures'
 
 export default function Category(props) {
+
+    const {data, error, message} = props
 
     const router = useRouter()
     const path = router.asPath
@@ -25,13 +28,11 @@ export default function Category(props) {
     const [songs, setSongs] = useState([])
     const [pageNo, setPageNo] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
-    const [isLoadingCategories, setIsLoadingCategories] = useState(true)
     const [isLoadingSongs, setIsLoadingSongs] = useState(true)
     const [tags, setTags] = useState([])
     const [categoryName, setCategoryName] = useState('')
     const [breadcrumb, setBreadcrumb] = useState([])
-
-    const perPageLimit = 20
+    const [pageMeta, setPageMeta] = useState({})
 
     const getCategoryId = () => {
         let url = window.location.href
@@ -40,23 +41,6 @@ export default function Category(props) {
         let categoryId = arr[categoryIndex + 1]
         return categoryId.split('?')[0]
     }
-
-    const fetchCategories = useCallback(async () => {
-        const payload = {
-            id: getCategoryId()
-        }
-        try {
-            const result = await getRequest('category', payload)
-            setCategories(result.data)
-            setIsLoadingCategories(false)
-            setTags(result.tags)
-            setCategoryName(result.category_name)
-            setBreadcrumb(result.breadcrumb)
-        }
-        catch (err) {
-            log(err)
-        }
-    }, [])
 
     const getPageNo = () => {
         let params = urlParams()
@@ -82,13 +66,21 @@ export default function Category(props) {
     }, [])
 
     useEffect(() => {
-        fetchCategories()
+        setCategories(data.data)
+        setCategoryName(data.category_name)
+        setBreadcrumb(data.breadcrumb)
         fetchSongs()
-    }, [path, query, fetchCategories, fetchSongs])
+        setTags(data.tags)
+        setPageMeta({
+            title: `${data.breadcrumb[data.breadcrumb.length - 1].title} - ${APP_INFO.APP_NAME}`,
+            image: '',
+            description: ''
+        })
+    }, [path, query, fetchSongs, data])
 
     return <>
+    <SocialMeta data={pageMeta} />
         <Breadcrumb data={breadcrumb} />
-        {isLoadingCategories && <CategorySkeleton count={8} />}
         {categories.length > 0 && pageNo === 1 && <div className={styles.cCatCont}>
             <Title iconClass="fa-guitar-electric" title={'Categories of ' + categoryName} />
             <div className={styles.categoriesContainer}>
@@ -137,4 +129,24 @@ export default function Category(props) {
             <OtherFeatures />
         </>}
     </>
+}
+
+export async function getServerSideProps(context){
+    const payload = {
+        id: context.query.categoryId
+    }
+    const response = await getRequest('category', payload)
+    if(response.status){
+        return {
+            props: {
+                data: response
+            }
+        }
+    }
+    return {
+        props: {
+            error: true,
+            message: response.error.message
+        }
+    }
 }

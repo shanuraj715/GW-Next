@@ -34,7 +34,6 @@ export default function audioPlayer() {
     }
 
     const play = () => {
-        console.log(audio)
         if (!audio) {
             log('Audio object not initialized')
             return
@@ -64,7 +63,6 @@ export const fetchAudioData = async (id) => {
     const payload = { id: id }
     try {
         const response = await getRequest('song', payload).response
-        console.log(response)
     }
     catch (err) {
         console.log(err)

@@ -54,7 +54,6 @@ function SignIn({ hide, openSignUpModal, openForgotPasswordModal }) {
         }
         try {
             const response = await postRequest('/user/login', payload)
-            console.log(response)
             if (response.status) {
                 dispatch({
                     type: 'user/updateLogged',
