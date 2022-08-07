@@ -15,6 +15,7 @@ import SongShare from '/components/SongShare/SongShare'
 import { APP_INFO } from '/constants'
 import ReactTooltip from 'react-tooltip';
 import { AppContext } from '/Store'
+import SocialMeta from '/components/common/SocialMeta/SocialMeta'
 
 
 import { getRequest } from '/extra/request'
@@ -33,6 +34,7 @@ export default function SongPage(props) {
     const [tags, setTags] = useState(data?.tags ?? [])
     const [relatedFiles, setRelatedFiles] = useState(data?.related_files ?? [])
     const [breadcrumb, setBreadcrumb] = useState(data?.breadcrumb ?? [])
+    const [pageMeta, setPageMeta] = useState({})
 
     // console.log(props)
     const audioPlayHandler = () => {
@@ -106,6 +108,12 @@ export default function SongPage(props) {
         setTags(data.tags ?? [])
         setRelatedFiles(data.related_files ?? [])
         setBreadcrumb(data.breadcrumb ?? [])
+        setPageMeta({
+            title: `${data.title} - ${APP_INFO.APP_NAME}`,
+            image: data.thumb,
+            description: `Download ${data.title} in high quality on your device and listen.`,
+            keywords: data.tags
+        })
     }, [data])
 
     const getPlayButtonText = () => {
@@ -129,6 +137,7 @@ export default function SongPage(props) {
 
     return <>
         {!error && <>
+            <SocialMeta data={pageMeta} />
             <Breadcrumb data={breadcrumb} />
             <SongDetail data={songData} />
             <div className={styles.sdBtnsCont}>
