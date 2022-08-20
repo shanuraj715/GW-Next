@@ -14,19 +14,17 @@ import FourOhFour from '/components/404/FourOhFour'
 import SongShare from '/components/SongShare/SongShare'
 import { APP_INFO } from '/constants'
 import ReactTooltip from 'react-tooltip';
-import { AppContext } from '/Store'
-import SocialMeta from '/components/common/SocialMeta/SocialMeta'
-
+import { NextSeo } from 'next-seo';
 
 import { getRequest } from '/extra/request'
+import getDeviceInfo from '/extra/GetDeviceInfo/GetDeviceInfo'
+import Horizontal from '/components/ads/Horizontal'
 
 export default function SongPage(props) {
 
-    const { state, dispatch } = useContext(AppContext)
-
     const router = useRouter()
-    const query = router.query
 
+    const {isMobile, isTablet, isDesktop, width} = getDeviceInfo()
 
     const { data, error, message, fetchAndPlay, isPlaying, audioId, play, pause } = props
 
@@ -34,7 +32,7 @@ export default function SongPage(props) {
     const [tags, setTags] = useState(data?.tags ?? [])
     const [relatedFiles, setRelatedFiles] = useState(data?.related_files ?? [])
     const [breadcrumb, setBreadcrumb] = useState(data?.breadcrumb ?? [])
-    const [pageMeta, setPageMeta] = useState({})
+
 
     // console.log(props)
     const audioPlayHandler = () => {
@@ -105,15 +103,9 @@ export default function SongPage(props) {
             file_key: data?.file_key,
         })
 
-        setTags(data.tags ?? [])
-        setRelatedFiles(data.related_files ?? [])
-        setBreadcrumb(data.breadcrumb ?? [])
-        setPageMeta({
-            title: `${data.title} - ${APP_INFO.APP_NAME}`,
-            image: data.thumb,
-            description: `Download ${data.title} in high quality on your device and listen.`,
-            keywords: data.tags
-        })
+        setTags(data?.tags ?? [])
+        setRelatedFiles(data?.related_files ?? [])
+        setBreadcrumb(data?.breadcrumb ?? [])
     }, [data])
 
     const getPlayButtonText = () => {
@@ -137,9 +129,28 @@ export default function SongPage(props) {
 
     return <>
         {!error && <>
-            <SocialMeta data={pageMeta} />
+
+            <NextSeo
+                title={`${data?.title} - ${APP_INFO.APP_NAME}`}
+                description={`Download ${data?.title} in high quality on your device and listen.`}
+                openGraph={{
+                    url: router.asPath,
+                    title: `${data?.title} - ${APP_INFO.APP_NAME}`,
+                    description: `Download ${data?.title} in high quality on your device and listen.`,
+                    images: [
+                        { url: data?.thumb },
+                    ],
+                    type: 'article',
+                    site_name: APP_INFO.APP_NAME,
+                }}
+            />
+
+
+
+
             <Breadcrumb data={breadcrumb} />
             <SongDetail data={songData} />
+            <Horizontal />
             <div className={styles.sdBtnsCont}>
                 <button className={`${buttonStyles.customBtn} ${styles.btn15}`} onClick={audioPlayHandler}>
                     <Icon classes={`${getPlayButtonText().icon} pd-r-10`} type="solid" />
@@ -180,23 +191,48 @@ export default function SongPage(props) {
     </>
 }
 
-export async function getServerSideProps(context) {
-    const { songId } = context.query
-    const params = {
-        id: songId,
+export async function getStaticPaths() {
+    const arr = []
+    try {
+        const response = await getRequest('songsIds')
+        if (response.status) {
+            response?.data?.songs.forEach(item => {
+                arr.push({ params: { songId: item.id, songTitle: item.title } })
+            })
+        }
+        else {
+            console.log(response)
+        }
     }
-    const response = await getRequest('song', params)
+    catch (err) {
+        console.log(err)
+    }
+    return {
+        paths: arr,
+        fallback: true,
+    };
+}
+
+
+
+export async function getStaticProps({ params }) {
+    const prms = {
+        id: params.songId,
+    }
+    const response = await getRequest('song', prms)
     if (response.status) {
         return {
             props: {
                 data: response.data
-            }
+            },
+            revalidate: 30,
         }
     }
     return {
         props: {
             error: true,
             message: response.error.message
-        }
+        },
+        revalidate: 30,
     }
 }

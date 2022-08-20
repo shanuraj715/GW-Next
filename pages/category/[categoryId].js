@@ -13,8 +13,9 @@ import SongCard from '/components/common/SongCard/SongCard'
 import Link from 'next/link'
 import paginationStyles from '/styles/pagination.module.scss'
 import Tags from '/components/common/Tags/Tags'
-import SocialMeta from '/components/common/SocialMeta/SocialMeta'
+import { NextSeo } from 'next-seo';
 import OtherFeatures from '/components/common/OtherFeatures/OtherFeatures'
+import Horizontal from '/components/ads/Horizontal'
 
 export default function Category(props) {
 
@@ -32,7 +33,6 @@ export default function Category(props) {
     const [tags, setTags] = useState([])
     const [categoryName, setCategoryName] = useState('')
     const [breadcrumb, setBreadcrumb] = useState([])
-    const [pageMeta, setPageMeta] = useState({})
 
     const getCategoryId = () => {
         let url = window.location.href
@@ -65,26 +65,31 @@ export default function Category(props) {
         }
     }, [])
 
-    console.log(data)
-
     useEffect(() => {
         setCategories(data.data)
         setCategoryName(data.category_name)
         setBreadcrumb(data.breadcrumb)
         fetchSongs()
-        console.log(data.tags)
         setTags(data.tags)
-        setPageMeta({
-            title: `${data.breadcrumb[data.breadcrumb.length - 1].title} - ${APP_INFO.APP_NAME}`,
-            image: '/favicon.png',
-            description: `Download all songs of ${data.category_name} on your device and enjoy. All songs are availabe in high quality.`,
-            keywords: `${data.tags} mp3, downlod, all songs download`
-        })
     }, [path, query, fetchSongs, data])
 
     return <>
-        <SocialMeta data={pageMeta} />
+        <NextSeo
+            title={`${data.breadcrumb[data.breadcrumb.length - 1].title} - ${APP_INFO.APP_NAME}`}
+            description={`Download all songs of ${data.category_name} on your device and enjoy. All songs are availabe in high quality.`}
+            openGraph={{
+                url: router.asPath,
+                title: `${data.breadcrumb[data.breadcrumb.length - 1].title} - ${APP_INFO.APP_NAME}`,
+                description: `Download all songs of ${data.category_name} on your device and enjoy. All songs are availabe in high quality.`,
+                images: [
+                    { url: `${APP_INFO.APP_URL}/favicon.png`},
+                ],
+                type: 'article',
+                site_name: APP_INFO.APP_NAME,
+            }}
+        />
         <Breadcrumb data={breadcrumb} />
+        <Horizontal />
         {categories.length > 0 && pageNo === 1 && <div className={styles.cCatCont}>
             <Title iconClass="fa-guitar-electric" title={'Categories of ' + categoryName} />
             <div className={styles.categoriesContainer}>
@@ -107,6 +112,7 @@ export default function Category(props) {
                             field3={item.size}
                         />
                     })}
+                    <Horizontal />
 
                     {/* PAGINATION */}
                     {totalPages > 1 &&

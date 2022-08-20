@@ -1,6 +1,10 @@
 import { useEffect } from 'react'
+import getDeviceInfo from '/extra/GetDeviceInfo/GetDeviceInfo';
+import Square from '/components/ads/Square'
 
 export default function GraphComment() {
+
+    const { width } = getDeviceInfo()
 
     const graphComment = () => {
 
@@ -19,7 +23,12 @@ export default function GraphComment() {
     }, [])
 
     return (
-        <div id="graphcomment"></div>
+        <div className="d-flex justify-content-between flex-column flex-lg-row">
+            {/* <div style={{flexGrow: '1'}}> */}
+                <div id="graphcomment" style={{flexGrow: '1'}}></div>
+            {/* </div> */}
+            <Square />
+        </div>
     )
 
 }

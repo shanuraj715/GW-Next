@@ -1,0 +1,26 @@
+.ad-song-p1 {
+  width: 360px;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ad-horizontal {
+  text-align: center;
+}
+
+.ad-horizontal div {
+  display: inline-block;
+  min-width: 400px;
+  width: 80%;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.horizontalMini {
+  min-width: 340px;
+  max-height: 80px;
+  overflow: hidden;
+}

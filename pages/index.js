@@ -7,8 +7,9 @@ import CategoryCard from '/components/common/CategoryCard/CategoryCard'
 import OtherFeatures from '/components/common/OtherFeatures/OtherFeatures'
 import { getRequest } from '/extra/request'
 import { AppContext } from '/Store'
-import SocialMeta from '/components/common/SocialMeta/SocialMeta'
 import {APP_INFO} from '/constants'
+import { NextSeo } from 'next-seo';
+import Horizontal from '/components/ads/Horizontal'
 
 export default function Home() {
 
@@ -30,16 +31,28 @@ export default function Home() {
     fetchCategories()
   }, [])
 
-  const pageMeta = {
-    title: APP_INFO.APP_NAME,
-    image: '/favicon.png',
-    description: APP_INFO.APP_DESCRIPTION,
-  }
+
 
   return (
     <>
-    <SocialMeta data={pageMeta} />
+    <NextSeo
+            title={APP_INFO.APP_NAME}
+            description={APP_INFO.APP_DESCRIPTION}
+            openGraph={{
+                url: APP_INFO.APP_URL,
+                title: APP_INFO.APP_NAME,
+                description: APP_INFO.APP_DESCRIPTION,
+                images: [
+                    { url: `${APP_INFO.APP_URL}/favicon.png` },
+                ],
+                type: 'article',
+                site_name: APP_INFO.APP_NAME,
+            }}
+        />
+        
+      <Horizontal />
       <LatestUploads />
+      <Horizontal />
       <div className="home-categories">
 
         <div className="categories-container">
@@ -52,6 +65,7 @@ export default function Home() {
           </>}
         </div>
       </div>
+      <Horizontal />
       <OtherFeatures />
     </>
   )

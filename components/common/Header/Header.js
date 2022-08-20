@@ -9,12 +9,14 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { AppContext } from '/Store'
 import { getRequest } from '/extra/request'
-
+import HorizontalMini from '/components/ads/HorizontalMini'
+import GetDeviceInfo from '/extra/GetDeviceInfo/GetDeviceInfo'
 
 function Header(props) {
 
     const router = useRouter()
 
+    const { width } = GetDeviceInfo()
     const [_, forceUpdate] = useReducer(x => x + 1, 0)
 
     const {
@@ -66,7 +68,7 @@ function Header(props) {
         }
     }, [dispatch])
 
-    return <header className={styles.header}>
+    return <header className={`d-flex justify-content-between ${styles.header}`}>
         <div className={styles.headerLeft}>
             <Link href="/">
                 <a className={styles.headerImage}>
@@ -75,7 +77,12 @@ function Header(props) {
             </Link>
             <span>{APP_INFO.APP_SLOGAN}</span>
         </div>
-        <div className="d-flex justify-content-center justify-content-md-end w-100">
+        {width >= 1200 &&
+            <div className="d-flex justify-content-center align-items-center w-100">
+                <HorizontalMini />
+            </div>
+        }
+        <div className="d-flex justify-content-center justify-content-md-end">
             <div className={styles.headerCenter}>
                 <div className={styles.headerSearchCont}>
                     <input type="text" placeholder="Search here..." value={string} onChange={e => setString(e.target.value)} onKeyPress={e => handleKeyPress(e)} />
