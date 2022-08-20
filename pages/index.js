@@ -9,6 +9,7 @@ import { getRequest } from '/extra/request'
 import { AppContext } from '/Store'
 import {APP_INFO} from '/constants'
 import { NextSeo } from 'next-seo';
+import Horizontal from '/components/ads/Horizontal'
 
 export default function Home() {
 
@@ -30,6 +31,8 @@ export default function Home() {
     fetchCategories()
   }, [])
 
+
+
   return (
     <>
     <NextSeo
@@ -46,7 +49,10 @@ export default function Home() {
                 site_name: APP_INFO.APP_NAME,
             }}
         />
+        
+      <Horizontal />
       <LatestUploads />
+      <Horizontal />
       <div className="home-categories">
 
         <div className="categories-container">
@@ -59,6 +65,7 @@ export default function Home() {
           </>}
         </div>
       </div>
+      <Horizontal />
       <OtherFeatures />
     </>
   )

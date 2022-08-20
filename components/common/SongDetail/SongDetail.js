@@ -4,12 +4,16 @@ import loading from '/assets/images/loading.svg'
 import styles from '/styles/songdetail.module.scss'
 import { copyToClipboard } from '/extra/utils'
 import toast from 'react-hot-toast'
+import getDeviceInfo from '/extra/GetDeviceInfo/GetDeviceInfo'
+import Square from '/components/ads/Square'
 
 export default function SongDetail(props) {
     const { data } = props
 
+    const { isMobile, isTablet, isDesktop, width } = getDeviceInfo()
+
     const copy = () => {
-        toast.success("Link copied to clipboard.", {position: 'bottom-left'})
+        toast.success("Link copied to clipboard.", { position: 'bottom-left' })
         copyToClipboard(APP_INFO.SHORT_URL_PATH + data.short_url)
     }
 
@@ -63,10 +67,11 @@ export default function SongDetail(props) {
                     </span>
                 </p>
             </div>
-
-            <div className={styles.sdRight}>
-            
-            </div>
+            {(width > 1250 || width < 950) &&
+                <div className={styles.sdRight}>
+                    <Square />
+                </div>
+            }
         </div>
     </>
 }

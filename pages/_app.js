@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useContext } from 'react'
 import '../styles/globals.scss'
 import '/styles/margin.css'
 import '/styles/padding.css'
+import '/styles/ads.css'
 import MainLayout from '../components/MainLayout/MainLayout'
 import 'bootstrap/dist/css/bootstrap.css'
 import Head from 'next/head'
@@ -16,16 +17,20 @@ import '/styles/global.css'
 import { StateProvider } from '/Store'
 import FooterPlayer from '/components/FooterPlayer/FooterPlayer'
 
-import {APP_INFO} from '/constants'
-import {copyToClipboard} from '/extra/utils'
+import { APP_INFO } from '/constants'
+import { copyToClipboard } from '/extra/utils'
 import { getRequest, postRequest } from '/extra/request'
 import { toast } from 'react-hot-toast'
 import { AppContext } from '/Store'
+import * as ga from '/lib/ga'
+import {useRouter} from 'next/router'
 
 // CUSTOM LOG
 import '/components/log/index'
 
 function MyApp({ Component, pageProps }) {
+
+  const router = useRouter()
 
   const user = useRef(useContext(AppContext).user)
 
@@ -46,6 +51,20 @@ function MyApp({ Component, pageProps }) {
     setModals({ setAllFalse, [key]: bool })
   }
 
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      ga.pageview(url)
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
+
 
   // AUDIO PLAYER
 
@@ -63,7 +82,7 @@ function MyApp({ Component, pageProps }) {
 
 
   const refreshPlayer = () => {
-    setAudioData({...audioData})
+    setAudioData({ ...audioData })
   }
 
   const fetchAndPlay = async (id) => {
@@ -138,17 +157,17 @@ function MyApp({ Component, pageProps }) {
           sid: audioId
         }
         const response = await getRequest('favourite', payload)
-        if(response.status){
-          if(response.message === 'added'){
-            toast.success("Added to favorites.", {position: 'bottom-left'})
+        if (response.status) {
+          if (response.message === 'added') {
+            toast.success("Added to favorites.", { position: 'bottom-left' })
             setIsFavorite(true)
           }
-          if(response.message === 'removed'){
+          if (response.message === 'removed') {
             toast.success("Removed from favorites.", { position: 'bottom-left' })
             setIsFavorite(false)
           }
         }
-        else{
+        else {
           toast.error(response.error.message)
         }
 
@@ -157,14 +176,14 @@ function MyApp({ Component, pageProps }) {
         console.log(err)
       }
     }
-    else{
+    else {
       toast.error("Please login to use this feature", { position: 'top-right' })
     }
   }
 
   const copyURL = () => {
     copyToClipboard(`${APP_INFO.SHORT_URL_PATH}${audioData.short_url}`)
-    toast.success("Link copied to clipboard", {position: 'top-right'})
+    toast.success("Link copied to clipboard", { position: 'top-right' })
   }
 
 
@@ -207,9 +226,9 @@ function MyApp({ Component, pageProps }) {
   }
 
   const download = () => {
-		let key = audioData.file_key
-		window.open(`${APP_INFO.DOWNLOAD_SERVER_URL}?file_id=${audioId}&auth_key=${key}`, '_blank')
-	}
+    let key = audioData.file_key
+    window.open(`${APP_INFO.DOWNLOAD_SERVER_URL}?file_id=${audioId}&auth_key=${key}`, '_blank')
+  }
 
 
   useEffect(() => {

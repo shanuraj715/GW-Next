@@ -17,10 +17,14 @@ import ReactTooltip from 'react-tooltip';
 import { NextSeo } from 'next-seo';
 
 import { getRequest } from '/extra/request'
+import getDeviceInfo from '/extra/GetDeviceInfo/GetDeviceInfo'
+import Horizontal from '/components/ads/Horizontal'
 
 export default function SongPage(props) {
 
     const router = useRouter()
+
+    const {isMobile, isTablet, isDesktop, width} = getDeviceInfo()
 
     const { data, error, message, fetchAndPlay, isPlaying, audioId, play, pause } = props
 
@@ -146,6 +150,7 @@ export default function SongPage(props) {
 
             <Breadcrumb data={breadcrumb} />
             <SongDetail data={songData} />
+            <Horizontal />
             <div className={styles.sdBtnsCont}>
                 <button className={`${buttonStyles.customBtn} ${styles.btn15}`} onClick={audioPlayHandler}>
                     <Icon classes={`${getPlayButtonText().icon} pd-r-10`} type="solid" />
