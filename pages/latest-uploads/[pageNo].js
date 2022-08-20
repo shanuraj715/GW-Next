@@ -54,7 +54,7 @@ function LatestUploads(props) {
             title={`Latest Uploads - Page ${pageNo} | ${APP_INFO.APP_NAME}`}
             description="Browse by recent uploads."
             openGraph={{
-                url: APP_INFO.APP_URL,
+                url: router.asPath,
                 title: `Latest Uploads - Page ${pageNo} | ${APP_INFO.APP_NAME}`,
                 description: "Browse by recent uploads.",
                 images: [
