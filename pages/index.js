@@ -1,8 +1,7 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import LatestUploads from '/components/LatestUploads/LatestUploads'
 import Title from '/components/common/SectionTitle/SectionTitle'
-import CategorySkeleton from '/components/common/Skeleton/CategorySkeleton'
 import CategoryCard from '/components/common/CategoryCard/CategoryCard'
 import OtherFeatures from '/components/common/OtherFeatures/OtherFeatures'
 import { getRequest } from '/extra/request'
@@ -11,27 +10,9 @@ import { APP_INFO } from '/constants'
 import { NextSeo } from 'next-seo';
 import Horizontal from '/components/ads/Horizontal'
 
-export default function Home() {
+export default function Home(props) {
 
-  const [categoryList, setCategoryList] = useState([])
-  const [isCategoryLoading, setIsCategoryLoading] = useState(true)
-
-  const fetchCategories = async () => {
-    try {
-      const result = await getRequest('home_categories')
-      setCategoryList(result.data)
-      setIsCategoryLoading(false)
-    }
-    catch (err) {
-      console.log(err)
-    }
-  }
-
-  useEffect(() => {
-    fetchCategories()
-  }, [])
-
-
+  const [categoryList] = useState(props.data ?? [])
 
   return (
     <>
@@ -56,8 +37,7 @@ export default function Home() {
       <div className="home-categories">
 
         <div className="categories-container">
-          {isCategoryLoading && <CategorySkeleton count={8} />}
-          {!isCategoryLoading && categoryList.length > 0 && <>
+          {categoryList.length > 0 && <>
             <Title iconClass="fa-guitar-electric" title="Music Categories" />
             {categoryList?.map((item, index) => (
               <CategoryCard key={index} category_id={item.category_id} category_name={item.category_name} />
@@ -69,4 +49,24 @@ export default function Home() {
       <OtherFeatures />
     </>
   )
+}
+
+export async function getStaticProps() {
+  let data = []
+  try {
+    const result = await getRequest('home_categories')
+    if (result.status) {
+      data = result.data
+    }
+  }
+  catch (err) {
+    console.log(err)
+  }
+
+  return {
+    props: {
+      data,
+    },
+    revalidate: 15
+  }
 }
