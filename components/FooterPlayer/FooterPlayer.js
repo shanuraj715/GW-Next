@@ -43,10 +43,7 @@ export default function FooterPlayer(props) {
     } = props
 
     const { title } = audioData
-    const {
-        loop: repeat,
-        currentTime: progressbarCurrentTime
-    } = audioObject
+    
 
     const currentTime = Math.ceil(currTime)
 
@@ -89,7 +86,7 @@ export default function FooterPlayer(props) {
         {!isExpanded &&
             <div className={styles.musicPlayer} id={styles.footerPlayer}>
                 <div className={styles.mpSeek}>
-                    <input data-for="scrubber-inp" data-tip type="range" min="0" max={duration ?? 0} id="scrubber" onChange={(e) => { seekHandler(e) }} value={(progressbarCurrentTime ?? 0)} />
+                    <input data-for="scrubber-inp" data-tip type="range" min="0" max={duration ?? 0} id="scrubber" onChange={(e) => { seekHandler(e) }} value={(currentTime ?? 0)} />
 
                 </div>
                 <div className={styles.mpLeft}>
@@ -128,7 +125,7 @@ export default function FooterPlayer(props) {
                             </div>
 
                             <span className={styles.mpControlBtn} onClick={repeatHandler}>
-                                <Icon classes={repeat ? 'fa-repeat-1-alt' : 'fa-repeat'} type="regular" />
+                                <Icon classes={loop ? 'fa-repeat-1-alt' : 'fa-repeat'} type="regular" />
                             </span>
 
                             <span className={styles.mpControlBtn}>

@@ -103,6 +103,7 @@ function MyApp({ Component, pageProps }) {
 
   const play = () => {
     audio.current.play()
+    audio.current.currentTime = 50
   }
 
   const pause = () => {
@@ -126,6 +127,7 @@ function MyApp({ Component, pageProps }) {
   const seek = (value) => {
     console.log(audioData)
     console.log(value)
+    setCurrentTime(value)
     audio.current.currentTime = value
   }
 
