@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { APP_INFO } from '/constants'
-import { useEffect } from 'react'
+import { ENV } from '/constants'
 
 
 function MyDocument() {
@@ -21,11 +21,12 @@ function MyDocument() {
             });
             `,
         }} />
+        {ENV === 'prod' &&
+          <script async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6719876622039428"
+            crossOrigin="anonymous"></script>
+        }
 
-        <script async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6719876622039428"
-          crossOrigin="anonymous"></script>
-      
 
 
 

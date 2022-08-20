@@ -52,7 +52,7 @@ export default function LatestUploads(props) {
                 })}
             </div>
             <p className={styles.latestUploadMoreBtn}>
-                <Link href="/latest-uploads">
+                <Link href="/latest-uploads/1">
                     <a>Browse Latest Uploads <Icon type="solid" classes="fa-angle-double-right" /></a>
                 </Link>
             </p>

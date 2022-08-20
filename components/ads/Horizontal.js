@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { ENV } from '/constants'
 
 function Horizontal() {
 
@@ -13,10 +14,10 @@ function Horizontal() {
     }
 
     useEffect(() => {
-        loadAd();
+        if(ENV === 'prod') loadAd();
     }, [])
 
-    return <div className="ad-horizontal">
+    return ENV === 'prod' && <div className="ad-horizontal">
         <div>
             <ins className="adsbygoogle"
                 style={{ display: 'block' }}

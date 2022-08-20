@@ -225,7 +225,7 @@ export async function getStaticProps({ params }) {
             props: {
                 data: response.data
             },
-            revalidate: 30,
+            revalidate: 120,
         }
     }
     return {
@@ -233,6 +233,6 @@ export async function getStaticProps({ params }) {
             error: true,
             message: response.error.message
         },
-        revalidate: 30,
+        revalidate: 10,
     }
 }

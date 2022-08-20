@@ -1,4 +1,4 @@
-const ENV = "prod"
+export const ENV = "dev"
 
 export const APP_INFO = {
     APP_NAME: "GaanaWorld.in",
