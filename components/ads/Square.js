@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { ENV } from '/constants'
 
 function Square() {
     const loadAd = () => {
@@ -12,11 +13,10 @@ function Square() {
     }
 
     useEffect(() => {
-        loadAd();
+        if(ENV === 'prod') loadAd();
     }, [])
 
-    return (
-        <div className="ad-song-p1">
+    return ENV === 'prod' && <div className="ad-song-p1">
             <ins className="adsbygoogle"
                 style={{display: 'block'}}
                 data-ad-client="ca-pub-6719876622039428"
@@ -24,7 +24,6 @@ function Square() {
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
         </div >
-    )
 }
 
 export default Square

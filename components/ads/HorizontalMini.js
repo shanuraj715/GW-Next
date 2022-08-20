@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { ENV } from '/constants'
 
 function HorizontalMini() {
 
@@ -13,10 +14,10 @@ function HorizontalMini() {
     }
 
     useEffect(() => {
-        loadAd();
+        if(ENV === 'prod') loadAd();
     }, [])
 
-    return <div className="horizontalMini">
+    return ENV === 'prod' && <div className="horizontalMini">
         <ins className="adsbygoogle"
             style={{display: "block"}}
             data-ad-format="fluid"
