@@ -4,7 +4,7 @@ import { getRequest } from '/extra/request'
 import LoadingBoxes from '/components/common/LoadingBoxes/LoadingBoxes'
 import styles from '/styles/linkShortnerPage.module.scss'
 import errorImage from '/assets/images/2953962.png'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import Link from 'next/link'
 
 export default function LinkShort() {
@@ -36,22 +36,24 @@ export default function LinkShort() {
         fetchData()
     }, [fetchData])
 
-    return <div className="mb-5">
-        {!errorText && <>
-            <LoadingBoxes />
-            <p className={styles.normalMessage}>Please wait. Redirecting you to the page.</p>
-        </>}
-        {errorText && <div className={styles.errorContainer}>
-            <div className={styles.errorImage}>
-            <Image src={errorImage} alt="" />
+    return (
+        <div className="mb-5">
+            {!errorText && <>
+                <LoadingBoxes />
+                <p className={styles.normalMessage}>Please wait. Redirecting you to the page.</p>
+            </>}
+            {errorText && <div className={styles.errorContainer}>
+                <div className={styles.errorImage}>
+                <Image src={errorImage} alt="" />
+                </div>
+                <p className={styles.errorMessage}>{errorText}</p>
+                <Link href="/" className={styles.homeBtn}>
+                    
+                        Go to Home
+                    
+                </Link>
             </div>
-            <p className={styles.errorMessage}>{errorText}</p>
-            <Link href="/">
-                <a className={styles.homeBtn}>
-                    Go to Home
-                </a>
-            </Link>
+            }
         </div>
-        }
-    </div>
+    );
 }

@@ -30,9 +30,9 @@ export default function FourOhFour(props) {
                 <h2>Page not found</h2>
                 <p>The page or file you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
                 <Link href="/">
-                    <a>Home</a>
+                    Home
                 </Link>
             </div>
         </div>
-    </>
+    </>;
 }
