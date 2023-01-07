@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-const FontAwesome = () => {
+const FontAwesome = (props) => {
 
     const getStyle = () => ({
         '--fa-primary-color': props.color1 || '#353b48',
