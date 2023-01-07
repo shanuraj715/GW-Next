@@ -1,36 +1,32 @@
 import React, { Component } from 'react'
 
-export class FontAwesome extends Component {
+const FontAwesome = () => {
 
-    getStyle = ( ) => ({
-            '--fa-primary-color': this.props.color1 || '#353b48',
-            '--fa-secondary-color': this.props.color2 || '#f5f6fa',
-            '--fa-secondary-opacity': this.props.color2_opacity || '1.0'
-        })
+    const getStyle = () => ({
+        '--fa-primary-color': props.color1 || '#353b48',
+        '--fa-secondary-color': props.color2 || '#f5f6fa',
+        '--fa-secondary-opacity': props.color2_opacity || '1.0'
+    })
 
-    render() {
-        return (
-            <React.Fragment>
-                { this.props.type ? 
-                    <React.Fragment>
-                        { this.props.type === 'solid' ? <i className={`fas ${this.props.classes}`}></i> : null }
+    return (
+        props.type &&
+        <>
+            {props.type === 'solid' && <i className={`fas ${props.classes}`}></i>}
 
 
-                        { this.props.type === 'regular' ? <i className={`far ${this.props.classes}`}></i> : null }
+            {props.type === 'regular' && <i className={`far ${props.classes}`}></i>}
 
 
-                        { this.props.type === 'light' ? <i className={`fal ${this.props.classes}`}></i> : null }
+            {props.type === 'light' && <i className={`fal ${props.classes}`}></i>}
 
 
-                        { this.props.type === 'duotone' ? <i className={`fad ${this.props.classes}`} style={ this.getStyle() }></i> : null }
+            {props.type === 'duotone' && <i className={`fad ${props.classes}`} style={getStyle()}></i>}
 
 
-                        { this.props.type === 'brands' ? <i className={`fab ${this.props.classes}`}></i> : null }
-                    </React.Fragment>
-                : null }
-            </React.Fragment>
-        )
-    }
+            {props.type === 'brands' && <i className={`fab ${props.classes}`}></i>}
+        </>
+
+    )
 }
 
 export default FontAwesome
