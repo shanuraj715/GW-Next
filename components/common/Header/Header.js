@@ -5,7 +5,7 @@ import Icon from '/components/FontAwesome/FontAwesome'
 import toast from 'react-hot-toast'
 import { APP_INFO } from '/constants'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import { useRouter } from 'next/router'
 import { AppContext } from '/Store'
 import { getRequest } from '/extra/request'
