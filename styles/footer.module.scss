@@ -61,17 +61,17 @@
 .card {
   position: relative;
   background: #333;
-  width: 470px;
+  width: 380px;
   /* height: 75vh; */
   border-radius: 6px;
-  padding: 2rem;
+  padding: 0.5rem;
   color: #aaa;
   box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2), 0 0 1rem rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
 .card__imageContainer {
-  margin: -2rem -2rem 1rem -2rem;
+  margin: -1rem -1rem -1rem -1rem;
 }
 
 .card__line {
@@ -99,12 +99,16 @@
   opacity: 0;
   animation: ContentFadeIn 0.8s 1.2s forwards;
   -webkit-animation: ContentFadeIn 0.8s 1.2s forwards;
+
+  p {
+    margin-bottom: 10px;
+  }
 }
 
 .card__svg {
   position: absolute;
   left: 0;
-  top: 235px;
+  top: 195px;
 }
 
 @keyframes LineFadeIn {
@@ -176,14 +180,14 @@
 
   a {
     text-decoration: none !important;
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     margin-right: 20px;
-    font-size: 25px;
+    font-size: 18px;
     overflow: hidden;
     position: relative;
     color: #dcdde1;
@@ -206,6 +210,7 @@
     display: inline-block;
     height: 100%;
     vertical-align: middle;
+    position: absolute;
   }
 }
 
