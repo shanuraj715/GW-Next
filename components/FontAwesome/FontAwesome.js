@@ -9,25 +9,23 @@ const FontAwesome = () => {
     })
 
     return (
-        <React.Fragment>
-            {props.type ?
-                <React.Fragment>
-                    {props.type === 'solid' ? <i className={`fas ${props.classes}`}></i> : null}
+        props.type &&
+        <>
+            {props.type === 'solid' && <i className={`fas ${props.classes}`}></i>}
 
 
-                    {props.type === 'regular' ? <i className={`far ${props.classes}`}></i> : null}
+            {props.type === 'regular' && <i className={`far ${props.classes}`}></i>}
 
 
-                    {props.type === 'light' ? <i className={`fal ${props.classes}`}></i> : null}
+            {props.type === 'light' && <i className={`fal ${props.classes}`}></i>}
 
 
-                    {props.type === 'duotone' ? <i className={`fad ${props.classes}`} style={getStyle()}></i> : null}
+            {props.type === 'duotone' && <i className={`fad ${props.classes}`} style={getStyle()}></i>}
 
 
-                    {props.type === 'brands' ? <i className={`fab ${props.classes}`}></i> : null}
-                </React.Fragment>
-                : null}
-        </React.Fragment>
+            {props.type === 'brands' && <i className={`fab ${props.classes}`}></i>}
+        </>
+
     )
 }
 
