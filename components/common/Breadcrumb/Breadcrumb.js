@@ -14,34 +14,32 @@ export default function Breadcrumb(props) {
     }
 
     const breadcrumb = () => list?.map((item, index) => {
-        return (
-            item.id && (item.id !== '' && item.id !== '#') ? <React.Fragment key={index}>
-                <Link href={generateUrl(item.id)}>
-                    <a className={styles.breadcrumbLink}>
-                        {item.title}
-                    </a>
-                </Link>
+        return item.id && (item.id !== '' && item.id !== '#') ? <React.Fragment key={index}>
+            <Link href={generateUrl(item.id)} className={styles.breadcrumbLink}>
+
+                {item.title}
+
+            </Link>
+            {index < list.length - 1 && <Icon classes={`fa-chevron-right mg-lr-10 ${styles.breadcrumbSap}`} type="solid" />}
+        </React.Fragment>
+            :
+            <React.Fragment key={index}>
+                <span className={styles.breadcrumbLink}>{item.title}</span>
                 {index < list.length - 1 && <Icon classes={`fa-chevron-right mg-lr-10 ${styles.breadcrumbSap}`} type="solid" />}
-            </React.Fragment>
-                :
-                <React.Fragment key={index}>
-                    <span className={styles.breadcrumbLink}>{item.title}</span>
-                    {index < list.length - 1 && <Icon classes={`fa-chevron-right mg-lr-10 ${styles.breadcrumbSap}`} type="solid" />}
-                </React.Fragment>
-        )
+            </React.Fragment>;
     })
 
     return (
         <div className={styles.breadcrumbCont}>
             <Link href="/">
-                <a>
-                    <Icon classes={`fa-home ${styles.homeBtn}`} type="solid" />
-                </a>
+
+                <Icon classes={`fa-home ${styles.homeBtn}`} type="solid" />
+
             </Link>
             <Icon classes={`fa-chevron-right mg-lr-10 ${styles.breadcrumbSap}`} type="solid" />
             {data.length !== 0 ? <Icon classes={`fa-chevron-right mg-lr-10 ${styles.breadcrumbSap}`} type="solid" /> : null}
             {breadcrumb()}
         </div>
-    )
+    );
 
 }
