@@ -61,34 +61,38 @@ export default function Search(props) {
     }, [query, fetchData])
 
     const noResultJsx = () => {
-        return <div className={styles.noResultContainer}>
-            <div className={styles.noResultImageC}>
-                <img src={noResultImage.src} alt="" />
+        return (
+            <div className={styles.noResultContainer}>
+                <div className={styles.noResultImageC}>
+                    <img src={noResultImage.src} alt="" />
+                </div>
+                <div className={styles.noResData}>
+                    <p className={styles.noResTitle}>No Result Found</p>
+                    <p className={styles.noResDesc}>Sorry!!!<br />We do not have any data for your query.</p>
+                    <Link href="/" className={styles.noResLink}>
+                        
+                            HomePage
+                        
+                    </Link>
+                </div>
             </div>
-            <div className={styles.noResData}>
-                <p className={styles.noResTitle}>No Result Found</p>
-                <p className={styles.noResDesc}>Sorry!!!<br />We do not have any data for your query.</p>
-                <Link href="/">
-                    <a className={styles.noResLink}>
-                        HomePage
-                    </a>
-                </Link>
-            </div>
-        </div>
+        );
     }
 
     const pagination = () => {
-        return <div className={paginationStyles.paginationCont}>
-            <div className={paginationStyles.paginationBtnCont}>
-                <Link href={`/search/${searchStr}`}>1</Link>
-                <Link href={`/search/${searchStr}?page=${(getPageNo() <= 1 ? 1 : getPageNo() - 1)}`}>Prev</Link>
-                <span>{getPageNo()}</span>
-                <Link href={`/search/${searchStr}?page=${(getPageNo() === totalPages ? totalPages : getPageNo() + 1)}`}>Next</Link>
-                <Link href={`/search/${searchStr}?page=${totalPages}`}>
-                    {totalPages}
-                </Link>
+        return (
+            <div className={paginationStyles.paginationCont}>
+                <div className={paginationStyles.paginationBtnCont}>
+                    <Link href={`/search/${searchStr}`}>1</Link>
+                    <Link href={`/search/${searchStr}?page=${(getPageNo() <= 1 ? 1 : getPageNo() - 1)}`}>Prev</Link>
+                    <span>{getPageNo()}</span>
+                    <Link href={`/search/${searchStr}?page=${(getPageNo() === totalPages ? totalPages : getPageNo() + 1)}`}>Next</Link>
+                    <Link href={`/search/${searchStr}?page=${totalPages}`} legacyBehavior>
+                        {totalPages}
+                    </Link>
+                </div>
             </div>
-        </div>
+        );
     }
 
     return <>

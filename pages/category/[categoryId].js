@@ -120,16 +120,16 @@ export default function Category(props) {
 
                             <div className={paginationStyles.paginationBtnCont}>
                                 <Link href={`${'/category/' + getCategoryId()}`}>
-                                    <a>1</a></Link>
+                                    1</Link>
                                 <Link href={`${'/category/' + getCategoryId() + '?page=' + (getPageNo() === 1 ? 1 : getPageNo() - 1)}`}>
-                                    <a>Prev</a>
+                                    Prev
                                 </Link>
                                 <span>{getPageNo()}</span>
                                 <Link href={`${'/category/' + getCategoryId() + (getPageNo() === totalPages ? '' : '?page=' + (getPageNo() + 1))}`}>
-                                    <a>Next</a>
+                                    Next
                                 </Link>
                                 <Link href={`${'/category/' + getCategoryId() + '?page=' + totalPages}`}>
-                                    <a>{totalPages}</a>
+                                    {totalPages}
                                 </Link>
                             </div>
                         </div>}
@@ -138,7 +138,7 @@ export default function Category(props) {
         </>}
         {tags.length > 0 && <Tags data={tags} />}
         <OtherFeatures />
-    </>
+    </>;
 }
 
 export async function getServerSideProps(context) {

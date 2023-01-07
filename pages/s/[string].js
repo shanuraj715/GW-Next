@@ -36,22 +36,24 @@ export default function LinkShort() {
         fetchData()
     }, [fetchData])
 
-    return <div className="mb-5">
-        {!errorText && <>
-            <LoadingBoxes />
-            <p className={styles.normalMessage}>Please wait. Redirecting you to the page.</p>
-        </>}
-        {errorText && <div className={styles.errorContainer}>
-            <div className={styles.errorImage}>
-            <Image src={errorImage} alt="" />
+    return (
+        <div className="mb-5">
+            {!errorText && <>
+                <LoadingBoxes />
+                <p className={styles.normalMessage}>Please wait. Redirecting you to the page.</p>
+            </>}
+            {errorText && <div className={styles.errorContainer}>
+                <div className={styles.errorImage}>
+                <Image src={errorImage} alt="" />
+                </div>
+                <p className={styles.errorMessage}>{errorText}</p>
+                <Link href="/" className={styles.homeBtn}>
+                    
+                        Go to Home
+                    
+                </Link>
             </div>
-            <p className={styles.errorMessage}>{errorText}</p>
-            <Link href="/">
-                <a className={styles.homeBtn}>
-                    Go to Home
-                </a>
-            </Link>
+            }
         </div>
-        }
-    </div>
+    );
 }

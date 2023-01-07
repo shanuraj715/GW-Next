@@ -81,22 +81,22 @@ function LatestUploads(props) {
 
             <div className={paginationStyles.paginationBtnCont}>
                 <Link href={`${'/latest-uploads/1'}`}>
-                    <a>1</a></Link>
+                    1</Link>
                 <Link href={`/latest-uploads/${parseInt(pageNo) === 1 ? 1 : parseInt(pageNo) - 1}`}>
-                    <a>Prev</a>
+                    Prev
                 </Link>
                 <span>{pageNo}</span>
                 <Link href={`/latest-uploads/${parseInt(pageNo) === totalPages ? totalPages : parseInt(pageNo) + 1}`}>
-                    <a>Next</a>
+                    Next
                 </Link>
                 <Link href={`/latest-uploads/${totalPages}`}>
-                    <a>{totalPages}</a>
+                    {totalPages}
                 </Link>
             </div>
         </div>
         }
         <OtherFeatures />
-    </>
+    </>;
 }
 
 
