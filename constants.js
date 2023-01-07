@@ -12,7 +12,7 @@ export const APP_INFO = {
 }
 
 export const API = {
-    URL: "https://buzzz.techfacts007.in/",
+    URL: "https://api.gaanaworld.in/",
     ENDPOINTS: {}
 }
 
