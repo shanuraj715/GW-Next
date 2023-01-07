@@ -4,7 +4,7 @@ import { getRequest } from '/extra/request'
 import LoadingBoxes from '/components/common/LoadingBoxes/LoadingBoxes'
 import styles from '/styles/linkShortnerPage.module.scss'
 import errorImage from '/assets/images/2953962.png'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import Link from 'next/link'
 
 export default function LinkShort() {
