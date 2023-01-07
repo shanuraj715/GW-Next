@@ -1,5 +1,5 @@
 
-global.log = (data) => {
+global.log = (data, color) => {
     function backgroundStyle(type) {
         switch (type) {
             case 'string':
@@ -21,7 +21,7 @@ global.log = (data) => {
     const type = typeof data
     if (data === null || styleForTypes.includes(type)) {
         let style = `display: inline-block;
-        background-color: ${backgroundStyle(type)};
+        background-color: ${color ?? backgroundStyle(type)};
         color: #ffffff;
         font-weight: bold;
         padding: 3px 7px 3px 7px;
