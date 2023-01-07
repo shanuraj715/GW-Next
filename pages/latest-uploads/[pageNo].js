@@ -26,11 +26,12 @@ function LatestUploads(props) {
     const fetchData = useCallback(async () => {
         setData([])
         setIsLoading(true)
+        console.log(router.query)
         const params = {
             limit: LIMITS.LATEST_UPLOADS,
             order: 'song_id',
             by: 'desc',
-            offset: (LIMITS.LATEST_UPLOADS * ((router.query.params && router.query.params[0]) ?? 1)) - LIMITS.LATEST_UPLOADS
+            offset: (LIMITS.LATEST_UPLOADS * ((router.query.pageNo ?? 1) ?? 1)) - LIMITS.LATEST_UPLOADS
         }
         try {
             const result = await getRequest('latest', params)
@@ -44,10 +45,9 @@ function LatestUploads(props) {
         }
     }, [router])
 
-    // useEffect(() => {
-    //     log("Latest Uploads Page Loaded")
-    //     fetchData()
-    // }, [fetchData])
+    useEffect(() => {
+        fetchData()
+    }, [fetchData])
 
     return <>
         <NextSeo
