@@ -12,19 +12,16 @@ import GraphComment from '/components/GraphComment/GraphComment'
 import SongCard from '/components/common/SongCard/SongCard'
 import FourOhFour from '/components/404/FourOhFour'
 import SongShare from '/components/SongShare/SongShare'
-import { APP_INFO } from '/constants'
+import { APP_INFO, API } from '/constants'
 import ReactTooltip from 'react-tooltip';
 import { NextSeo } from 'next-seo';
 
 import { getRequest } from '/extra/request'
-import getDeviceInfo from '/extra/GetDeviceInfo/GetDeviceInfo'
 import Horizontal from '/components/ads/Horizontal'
 
 export default function SongPage(props) {
 
     const router = useRouter()
-
-    const {isMobile, isTablet, isDesktop, width} = getDeviceInfo()
 
     const { data, error, message, fetchAndPlay, isPlaying, audioId, play, pause } = props
 
@@ -81,6 +78,10 @@ export default function SongPage(props) {
         }
     }
 
+    const updateTotalDownloads = async (songId) => {
+        await getRequest('updateDownload?id=' + songId)
+    }
+
     useEffect(() => {
         setSongData({
             thumb: data?.thumb,
@@ -107,6 +108,11 @@ export default function SongPage(props) {
         setRelatedFiles(data?.related_files ?? [])
         setBreadcrumb(data?.breadcrumb ?? [])
     }, [data])
+
+    useEffect(() => {
+        if (router.query.songId)
+            updateTotalDownloads(router.query.songId)
+    }, [router.query.songId])
 
     const getPlayButtonText = () => {
         if (isPlaying && audioId == songData.songId) {
