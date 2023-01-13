@@ -20,6 +20,7 @@
 
 .mpSeek input[type="range"] {
   display: block;
+  appearance: none;
   -webkit-appearance: none;
   background-color: var(--dark-red);
   height: 3px;
@@ -234,7 +235,7 @@
   display: none;
   padding: 12px 4px;
   position: absolute;
-  z-index: 5;
+  z-index: 110;
   width: 150px;
   right: -63px;
   bottom: 95px;
@@ -260,6 +261,7 @@
 
 .mpVc[type="range"] {
   display: block;
+  appearance: none;
   -webkit-appearance: none;
   background-color: #bdc3c7;
   height: 5px;
