@@ -8,6 +8,7 @@ import { AppContext } from '/Store'
 import adholder from '/assets/images/320x50.png'
 import { secToMinSec } from '/extra/utils'
 import GetDeviceInfo from '/extra/GetDeviceInfo/GetDeviceInfo'
+import Ad320x50 from '../ads/Ad320x50';
 
 export default function FooterPlayer(props) {
 
@@ -164,7 +165,8 @@ export default function FooterPlayer(props) {
 							{ this.props.isLogged ? "Next song name here" : 'Login to get favourite tracks.'}
 						</span> */}
                         <div className={styles.footerAdContainer}>
-                            <img src={adholder.src} alt="" />
+                            {/* <img src={adholder.src} alt="" /> */}
+                            <Ad320x50 />
                         </div>
 
                         <span className={styles.mpExpandBtn} onClick={() => { }}>
