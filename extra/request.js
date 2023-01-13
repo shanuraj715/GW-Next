@@ -21,7 +21,7 @@ export function handleError(error) {
         throw cancelMessage;
     } else {
         console.log(error)
-        throw error.response;
+        throw error?.response;
     }
 }
 
