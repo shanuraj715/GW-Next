@@ -1,4 +1,4 @@
-export const ENV = "dev"
+export const ENV = process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
 
 export const APP_INFO = {
     APP_NAME: "GaanaWorld.in",
