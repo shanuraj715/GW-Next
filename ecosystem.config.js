@@ -4,7 +4,7 @@ module.exports = {
         name: 'gaanaworld-frontend',
         env: {
             NODE_ENV: 'production',
-            PORT: 3020,
+            PORT: 3040,
         },
         env_file: '.env'
     }]
